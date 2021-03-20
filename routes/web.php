@@ -48,21 +48,14 @@ Route::group(['prefix' => 'admin','middleware' => ['auth', 'admin']], function()
     Route::get('view-details/{id}', 'ZoomClassesFormController@viewDetails')->name('form.index');
     Route::post('delete/form/{id}', 'ZoomClassesFormController@destroy')->name('delete.form');
     //product sub category
-    Route::resource('course/subcat', 'SubCategoryController');
-    Route::get('course/subcat', 'SubCategoryController@index')->name('subcategories');
-    Route::get('course-subcat', 'SubCategoryController@create')->name('subcateggory.create');
-    Route::post('course-subcat/delete/{id}', 'SubCategoryController@destroy');
+    Route::resource('service/subcat', 'SubCategoryController');
+    Route::get('service/subcat', 'SubCategoryController@index')->name('subcategories');
+    Route::get('service-subcat', 'SubCategoryController@create')->name('subcateggory.create');
+    Route::post('service-subcat/delete/{id}', 'SubCategoryController@destroy');
 
     //show subcategories of category
     Route::get('category-subcat-details/{id}','SubCategoryController@showCatSubcat')->name('view.subcat');
 
-    //admin CRUD of products
-    Route::post('delete/course/{id}', 'CourseController@destroy')->name('delete.course');
-    Route::any('add/course', 'CourseController@create');
-    Route::get('edit/course/{id}', 'CourseController@edit')->name('edit.course');
-    Route::any('update/course/{id}', 'CourseController@update');
-    Route::any('add-course', 'CourseController@store');
-    Route::any('courses', 'CourseController@index')->name('course.index');
 
     //admin CRUD of Course Authors
     Route::post('delete/author/{id}', 'AuthorController@destroy')->name('delete.author');
@@ -79,18 +72,6 @@ Route::group(['prefix' => 'admin','middleware' => ['auth', 'admin']], function()
     Route::get('edit/testimonial/{id}', 'TestimonialController@edit')->name('edit.testimonial');
     Route::post('update/testimonial/{id}', 'TestimonialController@update')->name('update.testimonial');
     Route::post('delete/testimonial/{id}', 'TestimonialController@destroy')->name('delete.testimonial');
-
-    //routes for Team Members
-    Route::get('team', 'TestimonialController@index')->name('view.team');
-    Route::get('add/team', 'TestimonialController@create')->name('add.team');
-    Route::post('store/team', 'TestimonialController@store')->name('store.team');
-    Route::get('edit/team/{id}', 'TestimonialController@edit')->name('edit.team');
-    Route::post('update/team/{id}', 'TestimonialController@update')->name('update.team');
-    Route::post('delete/team/{id}', 'TestimonialController@destroy')->name('delete.team');
-
-    Route::get('edit/classes/{id}', 'AdminClassesController@edit')->name('edit.classes');
-    Route::post('update/classes/{id}', 'AdminClassesController@update')->name('update.classes');
-    Route::post('update/nonlive-classes/{id}', 'AdminClassesController@nonLiveUpdate')->name('update.nonliveclasses');
 
     //routes for blog
     Route::get('blog', 'BlogController@index');
@@ -120,25 +101,6 @@ Route::group(['prefix' => 'admin','middleware' => ['auth', 'admin']], function()
     Route::post('rights-register/update','RightsController@update')->name('rights.update');
     Route::post('rights-register/delete/{id}','RightsController@destroy')->name('rights.delete');
 
-    //routes of engineering and consulting diagrams
-    Route::get('engineering-and-consulting','ConsultingFromController@index')->name('engineering-and-consulting.view');
-    Route::get('engineering-and-consulting/add','ConsultingFromController@create')->name('engineering-and-consulting.create');
-    Route::any('engineering-and-consulting/store','ConsultingFromController@store')->name('engineering-and-consulting.store');
-    Route::get('engineering-and-consulting/edit/{id}','ConsultingFromController@edit')->name('engineering-and-consulting.edit');
-    Route::post('engineering-and-consulting/update','ConsultingFromController@update')->name('engineering-and-consulting.update');
-    Route::post('engineering-and-consulting/delete/{id}','ConsultingFromController@destroy')->name('engineering-and-consulting.delete');
-
-    //route of engineering and consulting inquiries
-    Route::get('engineering-and-consulting/view-inquiries','ConsultingUsersController@getUsers');
-    Route::get('engineering-and-consulting/user-searches','ConsultingUsersController@userSearches')->name('engineering-and-consulting.user-searches.view');
-    Route::post('engineering-and-consulting/user-searches/{id}','ConsultingUsersController@delete')->name('engineering-and-consulting.user-searches.delete');
-    //route of engineering and consulting diagrams
-    Route::get('engineering-and-consulting/diagram-range','DiagramRangeController@index')->name('engineering-and-consulting.diagram-range.view');
-    Route::get('engineering-and-consulting/diagram-range/add','DiagramRangeController@create')->name('engineering-and-consulting.diagram-range.create');
-    Route::any('engineering-and-consulting/diagram-range/store','DiagramRangeController@store')->name('engineering-and-consulting.diagram-range.store');
-    Route::get('engineering-and-consulting/diagram-range/edit/{id}','DiagramRangeController@edit')->name('engineering-and-consulting.diagram-range.edit');
-    Route::post('engineering-and-consulting/diagram-range/update','DiagramRangeController@update')->name('engineering-and-consulting.diagram-range.update');
-    Route::post('engineering-and-consulting/diagram-range/delete/{id}','DiagramRangeController@destroy')->name('engineering-and-consulting.diagram-range.delete');
 
     //routes of users
     Route::get('users',[UsersController::class,'index'])->name('users.index');
@@ -156,11 +118,5 @@ Route::group(['prefix' => 'admin','middleware' => ['auth', 'admin']], function()
 Route::group(['prefix' => 'customer','middleware' => 'auth'], function() {
     Route::get('/','CustomerController@index');
 });
-Route::get('/about-us', 'FrontController@about');
-Route::get('view-course/{slug}', 'CourseController@show')->name('show.course');
-Route::get('/contact-us', 'FrontController@contact');
-Route::get('change_password', 'Auth\ChangePasswordController@showChangePasswordForm')->name('auth.change_password');
-Route::patch('change_password', 'Auth\ChangePasswordController@changePassword')->name('auth.change_password');
-Route::any('show/sub/cat/courses/{id}', 'CourseController@subCatCourses');
-Route::any('/show/cat/courses/{id}', 'CourseController@catCourses');
+
 

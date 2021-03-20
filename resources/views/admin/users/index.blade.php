@@ -58,10 +58,11 @@ Users Profile Section
 
                                 </tr>
                             </thead>
+                            @php $counter=1; @endphp
                             @foreach($users as $user)
                             <tbody>
                                 <td>
-                                    {{$user->id }}
+                                    {{$counter }}
                                 </td>
                                 <td>
                                     {{$user->name }}
@@ -75,16 +76,18 @@ Users Profile Section
                                         @endforeach
                                 </td>
                                 <td>
-                                   <a href="{{route('users.view', $user->id)}}" class="edit btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i></a>&nbsp;
-                                   <a href="{{route('users.edit', $user->id)}}" class="edit btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>&nbsp;
+
 
                                    <form method="POST" action="{{route('users.delete', $user->id)}}">
                                     @csrf
+                                    <a href="{{route('users.view', $user->id)}}" class="edit btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i></a>&nbsp;
+                                    <a href="{{route('users.edit', $user->id)}}" class="edit btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>&nbsp;
                                     <input name="_method" type="hidden" value="POST">
                                     <button type="submit" class="btn btn-sm btn-danger btn-flat show_confirm" data-toggle="tooltip" title='Delete'> <i class="fa fa-trash"> </i></button>
                                 </form>
                                 </td>
                             </tbody>
+                            @php $counter++; @endphp
                             @endforeach
                     </table>
               </div>

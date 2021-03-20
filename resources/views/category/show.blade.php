@@ -19,7 +19,7 @@ Category Index
         <div class="col-md-12">
             <div class="card">
                     <div class="card-header">
-                        <h3>Categories Listing</h3>
+                        <h3>Service Categories Listing</h3>
 
                         @if(session()->has('message'))
                         <div class="alert alert-custom">{{session()->get('message')}}</div>
@@ -27,8 +27,8 @@ Category Index
                         <div class="alert alert-danger">{{session()->get('error')}} </div>
                     @endif
 
-                            <a href="{{url('/admin/course-categories')}}" class="btn btn-primary ">Add New Category</a>&nbsp;&nbsp;&nbsp;
-                            <a href="{{url('/admin/course-subcat')}}" class="btn btn-primary ">Add Sub Category</a>
+                            <a href="{{url('/admin/service-categories')}}" class="btn btn-primary ">Add Category</a>&nbsp;&nbsp;&nbsp;
+                            <a href="{{url('/admin/service-subcat')}}" class="btn btn-primary ">Add Sub Category</a>
 
                     </div>
                     <br>
@@ -41,10 +41,10 @@ Category Index
                                         ID
                                     </td>
                                     <td>
-                                        Name
+                                       Category Name
                                     </td>
                                     <td>
-                                        Image
+                                        Featured Image
                                     </td>
                                     <td>
                                         Description
@@ -87,11 +87,12 @@ Category Index
                                     @endif
                                 </td>
                                 <td>
-                                    <a href="{{route('edit.category', $categories->id)}}" class="edit btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>&nbsp;
+
                                     {{-- <a href="{{route('delete.category', $categories->id)}}" class="edit btn btn-danger btn-sm"><i class="fa fa-trash" aria-hidden="true"></i></a> --}}
                                     <form method="POST" action="{{route('delete.category', $categories->id)}}">
                                         @csrf
                                         <input name="_method" type="hidden" value="POST">
+                                        <a href="{{route('edit.category', $categories->id)}}" class="edit btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>&nbsp;
                                         <button type="submit" class="btn btn-sm btn-danger btn-flat show_confirm" data-toggle="tooltip" title='Delete'> <i class="fa fa-trash"> </i></button>
                                     </form>
                                 </td>
@@ -119,47 +120,6 @@ Category Index
             e.preventDefault();
         }
     });
-    $(function() {
-        var self = this;
-        $('#categories-table').DataTable({
-        processing: true,
-        serverSide: true,
-        ajax: '{!! route('productCategories') !!}',
-        columns: [
-            { data: 'id', name: 'id' },
-            { data: 'name', name: 'name' },
-            {
-                "name": "image",
-                "data": "image",
-                "render": function (data, type, full, meta) {
-                    return "<img src=\"{{asset('uploads/categories/')}}"+"/" + data + "\" height=\"50\"/>" ;
-                },
-                "title": "Image",
-                "orderable": true,
-                "searchable": true
-            },
-            {
-                "name": "status",
-                "data": "status",
-                "render": function (data, type, full, meta) {
-                    if (data==1){
-                        return '<span style="color:green;">Active</span> ';
-                    }
-                    else{
-                        return '<span style="color:red;">Not Active</span>';
-                    }
-                },
-                "title": "Status",
-                "orderable": true,
-                "searchable": true
-            },
-            @can('productcategory.edit')
-            {data: 'action', name: 'action', orderable: false, searchable: false},
-            @endcan
-            {data: 'button', name: 'button', orderable: false, searchable: false},
 
-        ]
-    });
-    });
 </script>
 @endsection

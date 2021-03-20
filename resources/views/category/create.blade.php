@@ -34,7 +34,7 @@ Add Category
                 <div class="card-body">
 
 
-                    <form action="{{ url('admin/course-categories/store') }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ url('admin/service-categories/store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
 
                         <div class="form-group">

@@ -36,7 +36,7 @@ Add Category
                 <div class="card-body">
 
 
-                    <form action="{{ url('admin/course-categories/update/'.$category->id)}}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ url('admin/service-categories/update/'.$category->id)}}" method="POST" enctype="multipart/form-data">
                         @csrf
 
                         <div class="form-group">
@@ -49,18 +49,19 @@ Add Category
                             </div>
 
 
-                        < >
-                            <label for="Select Image">Select Image of Category</label><br>
+
+                            <label for="Select Image">Select Image of Category to Update</label><br>
 
                           <input type='file' name="image" onchange="readURL(this);" />
                           <br><br>
                           <label for="Select Image">Existing Image</label><br>
                           <img id="blah" src="{{ asset('uploads/') . '/' . $category->image }}" class="image" style="width: 100px;height:100px;" />
-                         </>
+
 
 
                          @if($category->status==1)
-                         <label >Category Status</label><br>
+                         <br><br>
+                         <label > <b> Category Status </b></label><br>
                          <div class="form-check">
 
 
@@ -78,10 +79,9 @@ Add Category
                          </label>
                          </div>
                  @else
-                     <div class="form-check">
-
-                         <label for="Product status">Product Status</label><br>
-
+                 <br><br>
+                 <label > <b> Category Status </b></label><br>
+                 <div class="form-check">
                          <input class="form-check-input" type="radio" name="status" id="exampleRadios1" value="1" >
                              <label class="form-check-label" for="exampleRadios1">
                                  Active
@@ -94,12 +94,12 @@ Add Category
                          Not Active
                          </label>
                          </div>
-
+                         <br>
                  @endif
 
 
                         <input type="submit" class="btn btn-primary" value="Update">
-                        <a href="{{url('admin/product-categories/delete/'.$category->id)}}"><input type="button" class="btn btn-primary" value="Delete"></a>
+                        <a href="{{url('admin/service/categories/delete/'.$category->id)}}"><input type="button" class="btn btn-primary" value="Delete"></a>
                     </form>
 
                 </div>

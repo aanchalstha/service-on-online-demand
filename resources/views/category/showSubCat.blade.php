@@ -19,7 +19,9 @@ Sub Categories Listing
                 </div>
 
                     <div class="container">
-                        <a href="{{ url('admin/course/categories')}}" class="btn btn-primary">Go Back</a>
+                        <br>
+                        <a href="{{ url('admin/service/categories')}}" class="btn btn-primary">Go Back</a>
+                        <br>
                        @if(count($subcat)>0)
 
                        <table class="table table-hover table-bordered">
@@ -42,7 +44,7 @@ Sub Categories Listing
 
                                 <td>
 
-                                <form method="POST" action="{{url('admin/course-subcat/delete/'.$subcat->id)}}">
+                                <form method="POST" action="{{url('admin/service-subcat/delete/'.$subcat->id)}}">
                                     @csrf
                                     <input name="_method" type="hidden" value="POST">
                                     <button type="submit" class="btn btn-sm btn-danger btn-flat show_confirm" data-toggle="tooltip" title='Delete'> <i class="fa fa-trash"> </i></button>
