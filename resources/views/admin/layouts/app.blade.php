@@ -32,7 +32,7 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ url('/')}}">
                 <div class="sidebar-brand-text mx-3">Service on Online Demand</div>
             </a>
 
@@ -54,10 +54,10 @@
 
             <!-- Nav Item - Pages Collapse Menu -->
 
-            <li class="nav-item ">
-                <a class="nav-link" href="">
+            <li class="nav-item {{ 'admin/service'== request()->path() ? 'active' :'' }}">
+                <a class="nav-link" href="{{ url('admin/service') }}">
                     <i class="fa fa-folder-open" aria-hidden="true"></i>
-                    <span>Services Management </span></a>
+                    <span>Services Entry </span></a>
             </li>
 
 
@@ -69,8 +69,13 @@
 
             <li class="nav-item {{ 'admin/service/categories'== request()->path() ? 'active' :'' }}">
                 <a class="nav-link" href="{{ url('admin/service/categories')}}">
-                    <i class="fas fa-fw fa-bars"></i>
+                    <i class="fas fa-fw fa-th-list"></i>
                     <span>Service Categories </span></a>
+            </li>
+            <li class="nav-item {{ 'admin/service/categories'== request()->path() ? 'active' :'' }}">
+                <a class="nav-link" href="{{ url('admin/service/categories')}}">
+                    <i class="fas fa-fw fa-list-alt"></i>
+                    <span>Sub-Categories </span></a>
             </li>
 
             <!-- Divider -->

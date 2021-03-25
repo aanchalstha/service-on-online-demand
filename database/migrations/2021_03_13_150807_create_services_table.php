@@ -50,15 +50,12 @@ class CreateServicesTable extends Migration
             $table->string('slug')->unique();
             $table->string('description', 5000);
             $table->string('other_information');
-            $table->date('start_date');
-            $table->date('end_date');
-            $table->string('charge');
+            $table->integer('service_time')->nullable();
+            $table->string('service_charge');
             $table->unsignedBigInteger('category_id')->nullable();
             $table->foreign('category_id')->references('id')->on('service_categories')->onDelete('cascade');
-
             $table->unsignedBigInteger('sub_category_id')->nullable();
             $table->foreign('sub_category_id')->references('id')->on('sub_categories')->onDelete('cascade');
-
             $table->integer('created_by')->nullable();
             $table->integer('updated_by')->nullable();
             $table->integer('deleted_by')->nullable();

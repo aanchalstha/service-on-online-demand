@@ -17,9 +17,7 @@ use App\Http\Controllers\ConsultingUsersController;
 */
 
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/','FrontController@index');
 
 Auth::routes(['verify' => true]);
 
@@ -45,8 +43,7 @@ Route::group(['prefix' => 'admin','middleware' => ['auth', 'admin']], function()
     Route::post('service-categories/delete/{id}', 'CategoryController@destroy')->name('delete.category');
     Route::get('service', 'CategoryController@getData')->name('productCategories');
 
-    Route::get('view-details/{id}', 'ZoomClassesFormController@viewDetails')->name('form.index');
-    Route::post('delete/form/{id}', 'ZoomClassesFormController@destroy')->name('delete.form');
+
     //product sub category
     Route::resource('service/subcat', 'SubCategoryController');
     Route::get('service/subcat', 'SubCategoryController@index')->name('subcategories');
@@ -56,14 +53,21 @@ Route::group(['prefix' => 'admin','middleware' => ['auth', 'admin']], function()
     //show subcategories of category
     Route::get('category-subcat-details/{id}','SubCategoryController@showCatSubcat')->name('view.subcat');
 
+    //admin CRUD of Services
+    Route::post('delete/service/{id}', 'ServicesController@destroy')->name('delete.service');
+    Route::any('add/service', 'ServicesController@create');
+    Route::get('edit/service/{id}', 'ServicesController@edit')->name('edit.service');
+    Route::any('update/service/{id}', 'ServicesController@update');
+    Route::any('add-service', 'ServicesController@store');
+    Route::get('service', 'ServicesController@index')->name('service.index');
 
-    //admin CRUD of Course Authors
-    Route::post('delete/author/{id}', 'AuthorController@destroy')->name('delete.author');
-    Route::any('add/author', 'AuthorController@create');
-    Route::get('edit/author/{id}', 'AuthorController@edit')->name('edit.author');
-    Route::any('update/author/{id}', 'AuthorController@update');
-    Route::any('add-author', 'AuthorController@store');
-    Route::get('authors', 'AuthorController@index')->name('author.index');
+    //admin CRUD of Service Providers
+    Route::post('delete/service-provider/{id}', 'ServiceProviderController@destroy')->name('delete.service-provider');
+    Route::any('add/service-provider', 'ServiceProviderController@create');
+    Route::get('edit/service-provider/{id}', 'ServiceProviderController@edit')->name('edit.service-provider');
+    Route::any('update/service-provider/{id}', 'ServiceProviderController@update');
+    Route::any('add-service-provider', 'ServiceProviderController@store');
+    Route::get('service-provider', 'ServiceProviderController@index')->name('service-provider.index');
 
     //routes for Testimonials
     Route::get('testimonials', 'TestimonialController@index')->name('view.testimonial');
