@@ -56,9 +56,7 @@ Category Index
                                     <td >
                                         Actions
                                     </td>
-                                    <td >
-                                       Sub Categories
-                                    </td>
+
                                 </tr>
 
                             </thead>
@@ -96,9 +94,7 @@ Category Index
                                         <button type="submit" class="btn btn-sm btn-danger btn-flat show_confirm" data-toggle="tooltip" title='Delete'> <i class="fa fa-trash"> </i></button>
                                     </form>
                                 </td>
-                                <td>
-                                    <a href="{{route('view.subcat', $categories->id)}}" class="edit btn btn-primary btn-sm">View Sub Categories</a>&nbsp;
-                                </td>
+
                             </tbody>
                             @endforeach
                         </table>
