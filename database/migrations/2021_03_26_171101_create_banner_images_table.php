@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateBlogsTable extends Migration
+class CreateBannerImagesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,14 @@ class CreateBlogsTable extends Migration
      */
     public function up()
     {
-        Schema::create('blogs', function (Blueprint $table) {
+        Schema::create('banner_images', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('member_id')->nullable();
+            $table->string('banner_title');
+            $table->string('banner_subtitle');
             $table->string('image');
-            $table->string('title')->unique();
-            $table->text('body');
-            $table->string('slug')->unique();
-            $table->boolean('active');
+            $table->unsignedBigInteger('category_id')->nullable();
+            $table->foreign('category_id')->references('id')->on('service_categories')->onDelete('cascade');
+            $table->integer('status')->default(1);
             $table->timestamps();
         });
     }
@@ -32,6 +32,6 @@ class CreateBlogsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('blogs');
+        Schema::dropIfExists('banner_images');
     }
 }

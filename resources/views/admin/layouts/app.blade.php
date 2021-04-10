@@ -93,39 +93,19 @@
                     <span>Banner Images</span></a>
             </li>
 
-            <li class="nav-item {{ 'admin/testimonials'== request()->path() ? 'active' :'' }}">
+            {{-- <li class="nav-item {{ 'admin/testimonials'== request()->path() ? 'active' :'' }}">
                 <a class="nav-link" href="{{ url('admin/testimonials')}}">
                     <i class="fa fa-quote-right" aria-hidden="true"></i>
                     <span>Testimonials</span></a>
-            </li>
-            <li class="nav-item {{ 'admin/blog'== request()->path() ? 'active' :'' }}">
-                <a class="nav-link" href="{{ url('admin/blog')}}">
-                    <i class="fa fa-book" aria-hidden="true"></i>
-                    <span>News and Events</span></a>
-            </li>
+            </li> --}}
+
 
             <hr class="sidebar-divider d-none d-md-block">
             <div class="sidebar-heading">
                 Account Settings
              </div>
 
-            <li class="nav-item {{ 'admin/rights-register'== request()->path() ? 'active' :'' }} {{ 'admin/role-register'== request()->path() ? 'active' :'' }} {{ 'admin/users'== request()->path() ? 'active' :'' }}">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
-                    aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="fa fa-users" aria-hidden="true"></i>
-                    <span>Users Management</span>
-                </a>
-                <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
-                    data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        {{-- <h6 class="collapse-header">Custom Utilities:</h6> --}}
-                        <a class="collapse-item" href="{{url('admin/rights-register')}}">Permissions</a>
-                        <a class="collapse-item" href="{{ url('admin/role-register')}}">User Roles</a>
-                        <a class="collapse-item" href="{{url('admin/users')}}">Users Listing</a>
 
-                    </div>
-                </div>
-            </li>
             <li class="nav-item {{ 'admin/settings'== request()->path() ? 'active' :'' }}">
                 <a class="nav-link" href="{{ url('admin/settings')}}">
                     <i class="fa fa-cogs" aria-hidden="true"></i>

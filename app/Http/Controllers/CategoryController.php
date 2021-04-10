@@ -69,11 +69,9 @@ class CategoryController extends Controller
         }
         // dd($filename);
         $category->name = $request->input('category_title');
-        $category->created_by  = Auth::user()->id;
         $category->image = $filename;
         $category->description = $request->input('description');
         $category->status = $request ->input('status');
-        $category->created_by = Auth::user()->id;
         $category->save();
         return redirect()->route('categories')->with(['message'=> 'Category Successfully Added!!']);
 
@@ -125,11 +123,9 @@ class CategoryController extends Controller
         }
 
         $category->name = $request->input('category_title');
-        $category->updated_by  = Auth::user()->id;
         $category->image = $filename;
         $category->description = $request->input('description');
         $category->status = $request ->input('status');
-        $category->updated_by = Auth::user()->id;
         $category->update();
         return redirect()->route('categories')->with(['message'=> 'Category Successfully Updated!!']);
     }

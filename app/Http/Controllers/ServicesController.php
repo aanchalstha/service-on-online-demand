@@ -79,7 +79,7 @@ class ServicesController extends Controller
          $service_data_to_insert['description'] = $request->description;
          $service_data_to_insert['other_information'] = $request->other_information;
          $service_data_to_insert['status'] = $request->status;
-         $service_data_to_insert['created_by'] = Auth::user()->id;
+
 
          $duplicate = Services::where('slug', $slug)->first();
          if ($duplicate) {

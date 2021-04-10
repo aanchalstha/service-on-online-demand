@@ -19,10 +19,11 @@ class CreateTestimonialsTable extends Migration
             $table->string('image');
             $table->string('position')->nullable();
             $table->string('text', 1000);
-            $table->integer('created_by')->nullable();
-            $table->integer('updated_by')->nullable();
-            $table->integer('deleted_by')->nullable();
-            $table->integer('is_deleted')->default(0);
+
+            $table->unsignedBigInteger('member_id')->nullable();
+            $table->foreign('member_id')->references('id')->on('members')->onDelete('cascade');
+            $table->unsignedBigInteger('service_id')->nullable();
+            $table->foreign('service_id')->references('id')->on('services')->onDelete('cascade');
             $table->integer('status')->default(1);
             $table->timestamps();
         });

@@ -1,8 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\UsersController;
-use App\Http\Controllers\ConsultingUsersController;
+
 
 
 /*
@@ -18,6 +17,10 @@ use App\Http\Controllers\ConsultingUsersController;
 
 
 Route::get('/','FrontController@index');
+Route::get('/services','FrontController@services');
+Route::get('/about','FrontController@about');
+Route::get('/testimonial','FrontController@testimonial');
+Route::get('/contact','FrontController@contact');
 
 Auth::routes(['verify' => true]);
 
@@ -76,45 +79,6 @@ Route::group(['prefix' => 'admin','middleware' => ['auth', 'admin']], function()
     Route::get('edit/testimonial/{id}', 'TestimonialController@edit')->name('edit.testimonial');
     Route::post('update/testimonial/{id}', 'TestimonialController@update')->name('update.testimonial');
     Route::post('delete/testimonial/{id}', 'TestimonialController@destroy')->name('delete.testimonial');
-
-    //routes for blog
-    Route::get('blog', 'BlogController@index');
-    Route::get('blog/new-post', 'BlogController@create');
-    Route::post('blog/new-post', 'BlogController@store')->name('blog.store');
-    Route::get('blog/edit/{slug}', 'BlogController@edit')->name('blog.edit');
-    Route::post('blog/update', 'BlogController@update')->name('blog.update');
-    Route::post('blog/delete/{id}', 'BlogController@destroy')->name('blog.delete');
-    Route::any('/blog-getdata','BlogController@getData')->name('blogData');
-
-    //routes of roles
-    Route::get('role-register','RolesModelController@index')->name('roles.view');
-    Route::get('role-getdata','RolesModelController@getData')->name('rolesData');
-    Route::get('role-register/add','RolesModelController@create')->name('roles.create');
-    Route::post('role-register/store','RolesModelController@store')->name('roles.store');
-    Route::get('role-register/edit/{id}','RolesModelController@edit')->name('roles.edit');
-    Route::get('role-register/view/{id}','RolesModelController@view')->name('roles.permissions');
-    Route::post('role-register/update','RolesModelController@update')->name('roles.update');
-    Route::post('role-register/delete/{id}','RolesModelController@destroy')->name('roles.delete');
-
-    //routes of rights
-    Route::get('rights-register','RightsController@index')->name('rights.view');
-    Route::get('rights-getdata','RightsController@getData')->name('rightsData');
-    Route::get('rights-register/add','RightsController@create')->name('rights.create');
-    Route::any('rights-register/store','RightsController@store')->name('rights.store');
-    Route::get('rights-register/edit/{id}','RightsController@edit')->name('rights.edit');
-    Route::post('rights-register/update','RightsController@update')->name('rights.update');
-    Route::post('rights-register/delete/{id}','RightsController@destroy')->name('rights.delete');
-
-
-    //routes of users
-    Route::get('users',[UsersController::class,'index'])->name('users.index');
-    Route::get('users/view/{id}',[UsersController::class,'show'])->name('users.view');
-    Route::get('users-data',[UsersController::class,'getData'])->name('users.getData');
-    Route::get('users/add',[UsersController::class,'create'])->name('users.create');
-    Route::post('users/add/data',[UsersController::class,'store'])->name('users.store');
-    Route::get('users/edit/{id}',[UsersController::class,'edit'])->name('users.edit');
-    Route::post('users/update/{id}',[UsersController::class,'update'])->name('users.update');
-    Route::post('users/delete/{id}',[UsersController::class,'destroy'])->name('users.delete');
 
     //routes for admin settings
     Route::get('settings','AdminController@viewSettings');

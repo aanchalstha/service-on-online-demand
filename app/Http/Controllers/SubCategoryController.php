@@ -55,7 +55,7 @@ class SubCategoryController extends Controller
 
         $subcat->category_id = $request->input('cat');
         $subcat->name = $request->input('cat_title');
-        $subcat->created_by  = Auth::user()->id;
+
         $subcat->save();
         return redirect()->route('categories')->with(['message'=> 'Successfully Added!!']);
 

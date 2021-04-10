@@ -1,83 +1,84 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
+<footer>
 
-    {{-- <link rel="icon" href="{{URL::to('assets')}}/img/frontend/dlogo.png" type="image/icon type"> --}}
-
-
-
-
-
-  </head>
-
-
-@include('include.css')
-
-<footer id="fh5co-footer" role="contentinfo" style="background-image: url(images/img_bg_4.jpg);">
-    <div class="overlay"></div>
+    <section class="footer-Content">
     <div class="container">
-        <div class="row row-pb-md">
-            <div class="col-md-3 fh5co-widget">
-                <h3>About NIE Nepal</h3>
-                <p>Nepal Institute of Engineering (NIE) is one of the pioneer institution in the field of
-                    Engineering. In a very short period of time, NIE has emerged into an academic
-                    institution widely acknowledged by working professionals and students of the
-                    Engineering Circle in Nepal.</p>
-            </div>
-            <div class="col-md-2 col-sm-4 col-xs-6 col-md-push-1 fh5co-widget">
-                <h3>Learning</h3>
-                <ul class="fh5co-footer-links">
-                    <li><a href="courses_page">Course</a></li>
-                    <li><a href="blog">Blog</a></li>
-                    <li><a href="#">Contact</a></li>
-                    <li><a href="#">Terms</a></li>
-                    <li><a href="#">Meetups</a></li>
-                </ul>
-            </div>
-
-            <div class="col-md-2 col-sm-4 col-xs-6 col-md-push-1 fh5co-widget">
-                <h3>Learn &amp; Grow</h3>
-                <ul class="fh5co-footer-links">
-                    <li><a href="#">Blog</a></li>
-                    <li><a href="#">Privacy</a></li>
-                    <li><a href="#">Testimonials</a></li>
-                    <li><a href="#">Handbook</a></li>
-                    <li><a href="#">Held Desk</a></li>
-                </ul>
-            </div>
-
-
-
-            <div class="col-md-2 col-sm-4 col-xs-6 col-md-push-1 fh5co-widget">
-                <h3>Legal</h3>
-                <ul class="fh5co-footer-links">
-                    <li><a href="#">Find Designers</a></li>
-                    <li><a href="#">Find Developers</a></li>
-                    <li><a href="#">Teams</a></li>
-                    <li><a href="#">Advertise</a></li>
-                    <li><a href="#">API</a></li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="row copyright">
-            <div class="col-md-12 text-center">
-                <p>
-                    <small class="block">&copy; 2021 All Rights Reserved.</small>
-                    <small class="block">Powered by <a href="https://scrapperstech.com/" target="_blank">Scrappers Technology</a></small>
-                </p>
-            </div>
-        </div>
-
+    <div class="row">
+    <div class="col-lg-4 col-md-4 col-xs-6 col-mb-12">
+    <div class="widget">
+    <div class="footer-logo"><img src="{{ asset('assets') }}/img/logo.png" alt="" style="width: 300px;height:100px;"></div>
+    <div class="textwidget">
     </div>
-</footer>
-</div>
+    <ul class="mt-3 footer-social">
+    <li><a class="facebook" href="#"><i class="lni-facebook-filled"></i></a></li>
+    <li><a class="twitter" href="#"><i class="lni-twitter-filled"></i></a></li>
+    <li><a class="linkedin" href="#"><i class="lni-linkedin-fill"></i></a></li>
+    <li><a class="google-plus" href="#"><i class="lni-google-plus"></i></a></li>
+    </ul>
+    </div>
+    </div>
+    <div class="col-lg-4 col-md-4 col-xs-6 col-mb-12">
+    <div class="widget">
+    <h3 class="block-title">Quick Link</h3>
+    <ul class="menu">
+    <li><a href="#">- About Us</a></li>
+    <li><a href="#">- Services</a></li>
+    <li><a href="#">- FAQ's</a></li>
+    <li><a href="#">- Service Categories</a></li>
+    <li><a href="#">- Login</a></li>
+    <li><a href="#">- Register</a></li>
+    <li><a href="#">- Contact</a></li>
+    <li><a href="#">- Testimonials</a></li>
+    </ul>
+    </div>
+    </div>
+    <div class="col-lg-4 col-md-4 col-xs-6 col-mb-12">
+    <div class="widget">
+    <h3 class="block-title">Contact Info</h3>
+    <ul class="contact-footer">
+    <li>
+    <strong><i class="lni-phone"></i></strong><span>+1 555 444 66647 <br> +1 555 444 66647</span>
+    </li>
 
-<div class="gototop js-top">
-    <a href="#" class="js-gotop"><i class="icon-arrow-up"></i></a>
-</div>
+    <li>
+    <strong><i class="lni-map-marker"></i></strong><span><a href="#">9870 St Vincent Place, Glasgow, DC 45 <br>Fr 45</a></span>
+    </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+    </div>
+    </section>
 
+
+
+
+    </footer>
+
+
+    <a href="#" class="back-to-top">
+    <i class="lni-chevron-up"></i>
+    </a>
+
+    <div id="preloader">
+    <div class="loader" id="loader-1"></div>
+    </div>
+
+
+    <script data-cfasync="false" src="cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="assets/js/jquery-min.js"></script>
+    <script src="{{ asset('assets') }}/js/popper.min.js"></script>
+    <script src="{{ asset('assets') }}/js/bootstrap.min.js"></script>
+    <script src="{{ asset('assets') }}/js/color-switcher.js"></script>
+    <script src="{{ asset('assets') }}/js/jquery.counterup.min.js"></script>
+    <script src="{{ asset('assets') }}/js/waypoints.min.js"></script>
+    <script src="{{ asset('assets') }}/js/wow.js"></script>
+    <script src="{{ asset('assets') }}/js/owl.carousel.min.js"></script>
+    <script src="{{ asset('assets') }}/js/jquery.slicknav.js"></script>
+    <script src="{{ asset('assets') }}/js/main.js"></script>
+    <script src="{{ asset('assets') }}/js/form-validator.min.js"></script>
+    <script src="{{ asset('assets') }}/js/contact-form-script.min.js"></script>
+    <script src="{{ asset('assets') }}/js/summernote.js"></script>
+    </body>
+
+
+    </html>

@@ -7,6 +7,7 @@ use App\BannerImage;
 use App\Category;
 use App\Testimonials;
 use App\Services;
+use DB;
 class FrontController extends Controller
 {
     /**
@@ -28,11 +29,27 @@ class FrontController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function services()
     {
-        //
+        $services = Services::where('status', 1)->get();
+        $category = Category::all();
+
+        return view('home.services',['services'=> $services, 'categories' =>$category]);
     }
 
+    public function about(){
+
+        return view('home.about');
+    }
+
+    public function testimonial(){
+        $testimonial = Testimonials::where('status', '1')->get();
+        return view('home.testimonial',['testimonials' => $testimonial]);
+    }
+    public function contact(){
+
+        return view('home.contact');
+    }
     /**
      * Store a newly created resource in storage.
      *
