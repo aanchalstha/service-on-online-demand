@@ -50,6 +50,12 @@ class FrontController extends Controller
 
         return view('home.contact');
     }
+
+    public function catServices($id){
+        $services = Services::where('category_id', $id)->get();
+        $category = Category::all();
+        return view('home.services',['services'=> $services, 'categories' =>$category]);
+    }
     /**
      * Store a newly created resource in storage.
      *

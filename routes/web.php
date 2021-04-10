@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/','FrontController@index');
 Route::get('/services','FrontController@services');
+Route::get('category/services/{id}','FrontController@catServices');
 Route::get('/about','FrontController@about');
 Route::get('/testimonial','FrontController@testimonial');
 Route::get('/contact','FrontController@contact');

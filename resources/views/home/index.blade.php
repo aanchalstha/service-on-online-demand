@@ -81,7 +81,7 @@
         <div class="row">
             @foreach($category as $data)
             <div class="col-lg-2 col-md-4 col-sm-6 col-xs-12">
-                <a href="">
+                <a href="{{url('/category/services/'.$data->id)}}">
                     <div class="icon-box">
                         <div class="icon">
                            <img src="{{asset('uploads/'.$data->image)}}" alt="{{$data->image}}" style="height:80px; width:80px;">
@@ -108,14 +108,14 @@
                         <span class="bg-green"><i class="lni-heart"></i></span>
                         <span><i class="lni-bookmark"></i></span>
                     </div>
-                    <a href="#"><img class="img-fluid" src="{{ asset('uploads') }}/services/{{$service->image}}" style="height: 300px;width:500px;" alt=""></a>
+                    <a href=""><img class="img-fluid" src="{{ asset('uploads') }}/services/{{$service->image}}" style="height: 300px;width:500px;" alt=""></a>
                 </figure>
                 <div class="feature-content" style="width:500px;">
                     {{-- <div class="product">
                         <a href="#">Electronic > </a>
                         <a href="#">Cameras</a>
                     </div> --}}
-                    <h4><a href="ads-details.html">{{$service->name}}</a></h4>
+                    <h4><a href="">{{$service->name}}</a></h4>
                     <div class="meta-tag">
                         <span>
                             <a href="#"><i class="lni-star-filled"></i>Duration: {{$service->service_time}} Day(s)</a>
