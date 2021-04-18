@@ -20,10 +20,8 @@ class CreateTestimonialsTable extends Migration
             $table->string('position')->nullable();
             $table->string('text', 1000);
 
-            $table->unsignedBigInteger('member_id')->nullable();
-            $table->foreign('member_id')->references('id')->on('members')->onDelete('cascade');
-            $table->unsignedBigInteger('service_id')->nullable();
-            $table->foreign('service_id')->references('id')->on('services')->onDelete('cascade');
+            $table->unsignedBigInteger('service_request_id')->nullable();
+            $table->foreign('service_request_id')->references('id')->on('service_requests')->onDelete('cascade');
             $table->integer('status')->default(1);
             $table->timestamps();
         });

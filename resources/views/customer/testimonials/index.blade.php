@@ -1,4 +1,4 @@
-@extends('admin.layouts.app')
+@extends('customer.layouts.app')
 @section('title')
 
 Category Index
@@ -19,7 +19,7 @@ Category Index
         <div class="col-md-12">
             <div class="card">
                     <div class="card-header">
-                        <h3>Testimonials Listing</h3>
+                        <h5>Reviews and Feedbacks Listing</h5>
 
                         @if(session()->has('message'))
                         <div class="alert alert-custom">{{session()->get('message')}}</div>
@@ -27,7 +27,7 @@ Category Index
                         <div class="alert alert-danger">{{session()->get('error')}} </div>
                     @endif
 
-                    <a href="{{url('admin/add/testimonial')}}" class="btn btn-primary ">Add New Testimonial</a>&nbsp;&nbsp;&nbsp;
+                    <a href="{{url('customer/add/review')}}" class="btn btn-primary ">Add New Review/Feedback</a>&nbsp;&nbsp;&nbsp;
 
 
                     </div>
@@ -60,10 +60,11 @@ Category Index
                                 </tr>
 
                             </thead>
+                            @php $counter =1; @endphp
                             @foreach($testimonials as $testimonial)
                             <tbody>
                                 <td>
-                                    {{$testimonial->id }}
+                                    {{$counter }}
                                 </td>
                                 <td>
                                     {{$testimonial->name }}
@@ -85,16 +86,18 @@ Category Index
                                     @endif
                                 </td>
                                 <td>
-                                    <a href="{{route('edit.testimonial', $testimonial->id)}}" class="edit btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>&nbsp;
+
 
                                     <form method="POST" action="{{route('delete.testimonial', $testimonial->id)}}">
                                         @csrf
+                                        <a href="{{route('edit.testimonial', $testimonial->id)}}" class="edit btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>&nbsp;
                                         <input name="_method" type="hidden" value="POST">
                                         <button type="submit" class="btn btn-sm btn-danger btn-flat show_confirm" data-toggle="tooltip" title='Delete'> <i class="fa fa-trash"> </i></button>
                                     </form>
                                 </td>
 
                             </tbody>
+                            @php $counter++; @endphp
                             @endforeach
                         </table>
 

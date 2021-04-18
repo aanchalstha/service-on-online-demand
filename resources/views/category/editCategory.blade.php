@@ -97,9 +97,9 @@ Add Category
                          <br>
                  @endif
 
-
+                         <br>
                         <input type="submit" class="btn btn-primary" value="Update">
-                        <a href="{{url('admin/service/categories/delete/'.$category->id)}}"><input type="button" class="btn btn-primary" value="Delete"></a>
+                        <a href="{{ route('categories')}}"><input type="button" class="btn btn-danger" value="Go Back"></a>
                     </form>
 
                 </div>

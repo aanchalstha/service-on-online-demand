@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Category;
 use App\SubCategories;
 use Auth;
-
+use DB;
 class SubCategoryController extends Controller
 {
     /**
@@ -18,10 +18,11 @@ class SubCategoryController extends Controller
 
     public function index()
     {
-        $subcat = SubCategories::paginate(15);
-
-
-        return view('category.show',['subcat' => $subcat]);
+        $subcat = DB::table('sub_categories as s')
+                    ->select('s.*','c.*','c.name as category_name','s.id as subcat_id','s.name as subcat_name')
+                    ->join('service_categories as c','c.id','=','s.category_id')
+                    ->get();
+        return view('subcategory.show',['subcat' => $subcat]);
     }
 
     /**
@@ -57,7 +58,7 @@ class SubCategoryController extends Controller
         $subcat->name = $request->input('cat_title');
 
         $subcat->save();
-        return redirect()->route('categories')->with(['message'=> 'Successfully Added!!']);
+        return redirect()->route('subcategories')->with(['message'=> 'Successfully Added!!']);
 
     }
 
@@ -116,6 +117,6 @@ class SubCategoryController extends Controller
 
         $cat->delete();
 
-        return redirect()->route('categories')->with(['message'=> 'Successfully Deleted Sub Category!!']);
+        return redirect()->route('subcategories')->with(['message'=> 'Successfully Deleted Sub Category!!']);
     }
 }

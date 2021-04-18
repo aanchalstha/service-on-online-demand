@@ -42,10 +42,13 @@
       -->
         <div class="logo">
 
-
-                  <h5 style="text-decoration: none; font-weight: bold;
-                  color: snow;">SERVICE ON <br> ONLINE DEMAND</h5>
-
+<center>
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" style="text-decoration:none;" href="{{ url('/')}}">
+        <div class="sidebar-brand-text mx-2"> <h5 style="color:snow; "> SERVICE ON ONLINE DEMAND </h5></div>
+    </a>
+                 {{-- <a href="{{ url('/')}}"> <h5 style="text-decoration: none; font-weight: bold;
+                  color: snow;">SERVICE ON <br> ONLINE DEMAND</h5></a> --}}
+</center>
 
         </div>
         <div class="sidebar-wrapper" id="sidebar-wrapper">
@@ -57,24 +60,16 @@
                 </a>
               </li>
 
-              <li class="{{ 'customer/view-orders'== request()->path() ? 'active' :'' }}">
-              <a href="{{ url('/customer/view-orders')}}">
-                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-
-                  <p>Ongoing Services</p>
-                </a>
-              </li>
-
-              <li class="{{ 'customer/view-invoices'== request()->path() ? 'active' :'' }}">
-              <a href="{{ url('/customer/view-invoices')}}">
+              <li class="{{ 'customer/view/completed/services'== request()->path() ? 'active' :'' }}">
+              <a href="{{ url('/customer/view/completed/services')}}">
                 <i class="fa fa-file-text-o" aria-hidden="true"></i>
 
-                  <p>Service History</p>
+                  <p>Completed Services</p>
                 </a>
               </li>
 
-              <li class="">
-                <a href="">
+              <li class="{{ 'customer/reviews'== request()->path() ? 'active' :'' }}">
+                <a href="{{ url('/customer/reviews')}}">
                     <i class="fa fa-star-o" aria-hidden="true"></i>
                   <p>Reviews and Feedbacks &nbsp;</p>
                 </a>
@@ -83,14 +78,14 @@
 
 
               <li class="{{ 'customer/user-profile'== request()->path() ? 'active' :'' }}">
-              <a href="{{url('/customer/user-profile/')}}">
+              <a href="{{url('/customer/')}}">
                 <i class="fa fa-user" aria-hidden="true"></i>
 
                   <p>Profile</p>
                 </a>
               </li>
-              <li class="{{ 'admin/settings'== request()->path() ? 'active' :'' }}">
-                <a href="{{ url('admin/settings')}}">
+              <li class="{{ 'customer/settings'== request()->path() ? 'active' :'' }}">
+                <a href="{{ url('customer/settings')}}">
                       <i class="fa fa-cogs" aria-hidden="true"></i>
                     <p>Settings</p>
                   </a>
@@ -161,10 +156,14 @@
 
         </div>
         <div class="content">
+            @if(session()->has('message'))
+            <div class="alert alert-success">{{session()->get('message')}}</div>
+            @elseif(session()->has('error'))
+            <div class="alert alert-danger">{{session()->get('error')}} </div>
+            @endif
 
-          @yield('content')
           <div class="container">
-
+            @yield('content')
         </div>
 
 

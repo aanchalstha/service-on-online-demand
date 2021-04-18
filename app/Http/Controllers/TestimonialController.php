@@ -7,6 +7,7 @@ use Image;
 use File;
 use DB;
 use Auth;
+use App\ServiceRequests;
 
 class TestimonialController extends Controller
 {
@@ -18,7 +19,9 @@ class TestimonialController extends Controller
     public function index()
     {
         $testimonials = Testimonials::all();
-        return view('admin.testimonials.index',['testimonials' => $testimonials]);
+
+
+        return view('customer.testimonials.index',['testimonials' => $testimonials]);
     }
 
     /**
@@ -28,7 +31,14 @@ class TestimonialController extends Controller
      */
     public function create()
     {
-        return view('admin.testimonials.create');
+        $services = DB::table('service_requests as sr')
+                        ->select('sr.*','s.name as service_name','s.service_time as duration','c.name as category_name','p.name as service_provider')
+                        ->join('services as s','s.id','=','sr.service_id')
+                        ->join('service_categories as c','c.id','=','s.category_id')
+                        ->leftJoin('service_providers as p','sr.service_provider_id','=','p.id')
+                        ->where('sr.isCompleted',1)->get();
+
+        return view('customer.testimonials.create',['services' => $services]);
     }
 
     /**
@@ -45,6 +55,7 @@ class TestimonialController extends Controller
             'image' => 'image|required',
             'position'=> 'required',
             'text'=> 'required',
+            'service_request_id' => 'required',
             'status'=> 'required',
         ]);
 
@@ -53,7 +64,7 @@ class TestimonialController extends Controller
             $file = $request->file('image');
 
             $extension = $file->getClientOriginalExtension();
-            $filename = date("Y_m_d_H_m_s") . '_testimonial_author.'.$extension;
+            $filename = date("Y_m_d_H_m_s") . '_testimonial.'.$extension;
             $img = Image::make($request->file('image'))->resize(600, 500)->save('uploads/testimonials/'.$filename, 60);
 
         } else {
@@ -65,6 +76,7 @@ class TestimonialController extends Controller
         $testimonial_data_to_store['image'] = $filename;
         $testimonial_data_to_store['position'] = $request->position;
         $testimonial_data_to_store['text'] = $request->text;
+        $testimonial_data_to_store['service_request_id'] = $request->service_request_id;
         $testimonial_data_to_store['status'] = $request->status;
 
         $status = DB::table('testimonials')->insert($testimonial_data_to_store);
@@ -88,7 +100,7 @@ class TestimonialController extends Controller
     {
         //
     }
-   
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -97,7 +109,14 @@ class TestimonialController extends Controller
      */
     public function edit($id)
     {
-        //
+        $testimonial = Testimonials::find($id);
+        $services = DB::table('service_requests as sr')
+                        ->select('sr.*','s.name as service_name','s.service_time as duration','c.name as category_name','p.name as service_provider')
+                        ->join('services as s','s.id','=','sr.service_id')
+                        ->join('service_categories as c','c.id','=','s.category_id')
+                        ->leftJoin('service_providers as p','sr.service_provider_id','=','p.id')
+                        ->where('sr.isCompleted',1)->get();
+        return view('customer.testimonials.edit',['data'=> $testimonial, 'services' => $services]);
     }
 
     /**
@@ -109,7 +128,48 @@ class TestimonialController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request,[
+            'name' => 'required',
+            'position'=> 'required',
+            'text'=> 'required',
+            'service_request_id' => 'required',
+            'status'=> 'required',
+        ]);
+        $data = Testimonials::find($id);
+
+        if($request->hasFile('image')) {
+
+            $file = $request->file('image');
+
+            if($data->image !='noimage.jpg'){
+                //delete Image
+                File::delete('uploads/testimonials/'.$data->image);
+            }
+            $extension = $file->getClientOriginalExtension();
+            $filename = date("Y_m_d_H_m_s") . '_testimonial.'.$extension;
+            $img = Image::make($request->file('image'))->resize(600, 500)->save('uploads/testimonials/'.$filename, 60);
+
+        } else {
+
+            $filename = Testimonials::where('id',$id)->pluck('image')->first();
+        }
+
+        $testimonial_data_to_update['name'] = $request->name;
+        $testimonial_data_to_update['image'] = $filename;
+        $testimonial_data_to_update['position'] = $request->position;
+        $testimonial_data_to_update['text'] = $request->text;
+        $testimonial_data_to_update['service_request_id'] = $request->service_request_id;
+        $testimonial_data_to_update['status'] = $request->status;
+
+        $status = Testimonials::where('id',$id)->update($testimonial_data_to_update);
+
+        if($status){
+            return redirect()->route('view.testimonial')->with(['message'=> 'Testimonial Successfully Updated!!']);
+        }
+        else{
+            return redirect()->route('view.testimonial')->with(['error'=> 'Error While Updating Testimonial!!']);
+        }
+
     }
 
     /**

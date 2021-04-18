@@ -61,8 +61,8 @@
             </li>
 
 
-            <li class="nav-item ">
-                <a class="nav-link" href="">
+            <li class="nav-item {{ 'admin/service-provider'== request()->path() ? 'active' :'' }}">
+                <a class="nav-link" href="{{ url('admin/service-provider') }}">
                     <i class="fa fa-street-view" aria-hidden="true"></i>
                     <span> Service Providers </span></a>
             </li>
@@ -72,8 +72,8 @@
                     <i class="fas fa-fw fa-th-list"></i>
                     <span>Service Categories </span></a>
             </li>
-            <li class="nav-item {{ 'admin/service/categories'== request()->path() ? 'active' :'' }}">
-                <a class="nav-link" href="{{ url('admin/service/categories')}}">
+            <li class="nav-item {{ 'admin/service/subcat'== request()->path() ? 'active' :'' }}">
+                <a class="nav-link" href="{{ url('admin/service/subcat')}}">
                     <i class="fas fa-fw fa-list-alt"></i>
                     <span>Sub-Categories </span></a>
             </li>

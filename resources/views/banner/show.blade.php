@@ -68,10 +68,11 @@ Add Banner Image
                                     <td>{{$banner->banner_title}}</td>
                                     <td>{{$banner->banner_subtitle}}</td>
                                     <td>
-                                        <a href="{{route('banner.edit', $banner->id)}}" class="edit btn btn-info btn-sm"><i class="fas fa-edit"></i></a>
+
 
                                         <form method="POST" action="{{route('banner.delete', $banner->id)}}">
                                             @csrf
+                                            <a href="{{route('banner.edit', $banner->id)}}" class="edit btn btn-info btn-sm"><i class="fas fa-edit"></i></a>
                                             <input name="_method" type="hidden" value="POST">
                                             <button type="submit" class="btn btn-sm btn-danger btn-flat show_confirm" data-toggle="tooltip" title='Delete'> <i class="fa fa-trash"> </i></button>
                                         </form>

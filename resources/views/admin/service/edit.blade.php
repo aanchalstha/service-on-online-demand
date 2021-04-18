@@ -7,7 +7,7 @@
 
 @section('title')
 
-Add Service
+Edit Service
 
 @endsection
 <style>
@@ -22,7 +22,7 @@ Add Service
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <h3>Add New Service Information</h3>
+                    <h3>Edit Service Information</h3>
 
                     @if($errors->count() > 0)
                     <div class="alert alert-danger">
@@ -40,12 +40,12 @@ Add Service
                 </div>
                 <div class="card-body">
                     Fields marked with <span style="color:red;font-size:15px;">&nbsp;*</span> are compulsary.
-                <form action="{{ action('ServicesController@store') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ url('admin/update/service', $service->id) }}" method="POST" enctype="multipart/form-data">
                         @csrf
 
                         <div class="form-group">
                             <label for="title">Service Name:<span style="color:red;font-size:15px;">&nbsp;*</span></label><br>
-                            <input type="text" name="service_name" class="form-control" placeholder="Service Title" ><br>
+                            <input type="text" name="service_name" class="form-control" value="{{$service->name}}" placeholder="Service Title" ><br>
 
                         </div>
 
@@ -56,7 +56,11 @@ Add Service
                                 <select class="form-control" name="category_id" id="exampleFormControlSelect1"  autocomplete="off">
                                     <option  disabled selected> Select Service Category</option>
                                     @foreach($category as $catData)
+                                    @if($catData->id == $service->category_id)
+                                    <option value="{{$catData->id}}" selected>{{$catData->name}}</option>
+                                   @else
                                     <option value="{{$catData->id}}">{{$catData->name}}</option>
+                                    @endif
                                 @endforeach
                                 </select>
                             </div>
@@ -65,7 +69,11 @@ Add Service
                                 <select class="form-control" name="subcategory_id" id="exampleFormControlSelect1">
                                     <option  disabled selected> Select Service Sub Category</option>
                                     @foreach($subcat as $catData)
+                                            @if($catData->id == $service->subcategory_id)
+                                            <option value="{{$catData->id}}" selected>{{$catData->name}}</option>
+                                        @else
                                          <option value="{{$catData->id}}">{{$catData->name}}</option>
+                                         @endif
                                     @endforeach
                                 </select>
                               </div>
@@ -76,45 +84,70 @@ Add Service
                             <label>Select Featured Image<span style="color:red;font-size:15px;">&nbsp;*</span></label><br>
                             <input type='file' name="image" onchange="readURL(this);" />
                             <br><br>
-                            <img id="blah" src="" alt="Uploaded Image will be displayed here." style="width: 200px;;"/>
+                            <img src="{{asset('uploads/services/'.$service->image)}}" id="blah" src="" alt="Uploaded Image will be displayed here." style="width: 200px;;"/>
                         </div>
                         <br>
 
                         <div class="form-group">
                             <label for="title">Service Description <span style="color:red;font-size:15px;">&nbsp;*</span></label><br>
-                            <textarea name="description" rows="5" cols="40" class="form-control tinymce-editor"></textarea>
+                            <textarea name="description" rows="5" cols="40" class="form-control tinymce-editor"> {{$service->description}}</textarea>
 
                         </div>
                         <div class="form-group">
                             <label for="title">Service Fee(In Rs.) <span style="color:red;font-size:15px;">&nbsp;*</span></label><br>
-                            <input type="number" step="any" name="service_fee" class="form-control" placeholder="e.g. 2500" ><br>
+                            <input type="number" step="any" name="service_fee" class="form-control" placeholder="e.g. 2500" value="{{$service->service_charge}}" ><br>
                         </div>
                         <div class="form-group">
                             <label for="title">Service Time Period(In Days) </label><br>
-                            <input type="number" step="any" name="service_time" class="form-control" placeholder="e.g. 2  for 2 Days" ><br>
+                            <input type="number" step="any" name="service_time" class="form-control" placeholder="e.g. 2  for 2 Days" value="{{$service->service_time}}"<br>
                         </div>
 
                         <div class="form-group">
                             <label for="title">Other Informations <span style="color:red;font-size:15px;">&nbsp;*</span></label><br>
-                            <textarea name="other_information" rows="5" cols="40" class="form-control tinymce-editor"></textarea>
+                            <textarea name="other_information" rows="5" cols="40" class="form-control tinymce-editor">{{$service->other_information}}</textarea>
                            <small>Note: This Information will be displayed after the customers choose the service.</small>
 
                         </div>
                         <br>
-                         <label>Service Active Status</label>
-                         <div class="form-check">
-                                                    <input class="form-check-input" type="radio" name="status" id="exampleRadios1" value="1" checked>
-                              <label class="form-check-label" for="exampleRadios1">
-                               Active
-                              </label>
-                        </div>
 
-                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="status" id="exampleRadios2" value="0">
-                            <label class="form-check-label" for="exampleRadios2">
-                             Not Active
+                        @if($service->status==1)
+
+                        <label > <b> Service Active Status </b></label><br>
+                        <div class="form-check">
+
+
+
+                        <input class="form-check-input" type="radio" name="status" id="exampleRadios1" value="1" checked>
+                            <label class="form-check-label" for="exampleRadios1">
+                                Active
                             </label>
                         </div>
+                        <div class="form-check">
+
+                        <input class="form-check-input" type="radio" name="status" id="exampleRadios2" value="0">
+                        <label class="form-check-label" for="exampleRadios2">
+                        Not Active
+                        </label>
+                        </div>
+                @else
+
+                <label > <b> Service Active Status </b></label><br>
+                <div class="form-check">
+                        <input class="form-check-input" type="radio" name="status" id="exampleRadios1" value="1" >
+                            <label class="form-check-label" for="exampleRadios1">
+                                Active
+                            </label>
+                        </div>
+                        <div class="form-check">
+
+                        <input class="form-check-input" type="radio" name="status" id="exampleRadios2" value="0" checked>
+                        <label class="form-check-label" for="exampleRadios2">
+                        Not Active
+                        </label>
+                        </div>
+                        <br>
+                @endif
+
 
                         <input type="submit" class="btn btn-primary" value="Add">
 

@@ -22,9 +22,9 @@ class ServicesController extends Controller
     public function index()
     {
         $service = DB::table('services as s')
-                      ->select('s.*','c.*','s.image as service_image','c.name as category_name')
+                      ->select('s.*','s.image as service_image','c.name as category_name')
                       ->leftjoin('service_categories as c','s.category_id','=','c.id')
-                      ->where('s.status',1)->get();
+                      ->get();
         return view('admin.service.index',['services' => $service]);
     }
 
@@ -115,7 +115,11 @@ class ServicesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $service = Services::find($id);
+        $category = Category::where('status',1)->get();
+        $subcat = SubCategories::where('status',1)->get();
+
+        return view('admin.service.edit',[ 'service' => $service, 'category' => $category,'subcat' => $subcat]);
     }
 
     /**
@@ -127,7 +131,48 @@ class ServicesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        $this->validate($request, [
+            'service_name'=>'required',
+            'category_id'=>'nullable',
+            'service_fee'=>'required',
+            'description'=>'required',
+            'other_information'=>'required'
+        ]);
+        $service = Services::find($id);
+         if($request->hasFile('image')) {
+            if($service->image !='noimage.jpg'){
+                //delete Image
+                File::delete('uploads/services/'.$service->image);
+            }
+             $file = $request->file('image');
+             $extension = $file->getClientOriginalExtension();
+             $filename = time(). '_courses.' .$extension;
+             $img = Image::make($request->file('image'))->resize(800,800)->save('uploads/services/'.$filename, 60);
+         } else {
+             $filename =  Services::where('id',$id)->pluck('image')->first();
+         }
+         $course_data_to_insert = [];
+
+         $service_data_to_update['name'] = $request->service_name;
+         $service_data_to_update['image'] = $filename;
+         $service_data_to_update['category_id'] = $request->category_id;
+         $service_data_to_update['sub_category_id'] = $request->sub_category_id ?? null;
+         $service_data_to_update['service_charge'] = $request->service_fee;
+         $service_data_to_update['service_time'] = $request->service_time ?? null;
+         $service_data_to_update['description'] = $request->description;
+         $service_data_to_update['other_information'] = $request->other_information;
+         $service_data_to_update['status'] = $request->status;
+
+
+         $status = Services::where('id', $id)->update($service_data_to_update);
+
+         if($status){
+             return redirect()->route('service.index')->with(['message'=> 'Service Information Successfully Updated !!']);
+         }
+         else{
+             return redirect()->route('service.index')->with(['error'=> 'Error While Updating Service. Please Try Again!!']);
+         }
     }
 
     /**

@@ -25,7 +25,7 @@ class CreateServiceRequestsTable extends Migration
             $table->unsignedBigInteger('service_provider_id')->nullable();
             $table->foreign('service_provider_id')->references('id')->on('service_providers')->onDelete('cascade');
             $table->text('description');
-            $table->integer('is_completed')->default(0);
+            $table->boolean('isCompleted')->default(false);
             $table->timestamps();
         });
     }

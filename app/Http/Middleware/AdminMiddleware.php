@@ -26,7 +26,7 @@ class AdminMiddleware
 
         else {
 
-            return redirect('/customer')->with('message', 'Welcome to NIE Nepal.');
+            return redirect('/customer')->with('message', 'Welcome to Service on Online Demand.');
 
     }
 

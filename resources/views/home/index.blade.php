@@ -32,7 +32,7 @@
 </div>
 
 
-<div class="search-button">
+{{-- <div class="search-button">
 <div class="container">
 <div class="row">
 <div class="col-md-12 col-lg-12 col-xs-12">
@@ -73,7 +73,7 @@
 </div>
 </div>
 </div>
-</div>
+</div> --}}
 
 <section class="categories-icon bg-light section-padding">
     <div class="container">
@@ -125,7 +125,7 @@
                     <p class="dsc">{{$service->description}}</p>
                     <div class="listing-bottom">
                         <h3 class="price float-left">Rs. {{$service->service_charge}}</h3>
-                        <a href="ads-details.html" class="btn btn-common float-right">View Details</a>
+                        <a href="{{ url('services')}}" class="btn btn-common float-right">View Details</a>
                     </div>
                 </div>
             </div>

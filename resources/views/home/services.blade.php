@@ -19,7 +19,7 @@
     @if(count($categories)>0)
     @foreach($categories as $category)
     <li>
-        <a href="#">
+        <a href="{{url('/category/services/'.$category->id)}}">
             {{$category->name}}
         </a>
     </li>
@@ -77,7 +77,7 @@
     <p class="dsc">{{$service->description}}</p>
     <div class="listing-bottom">
     <h3 class="price float-left">Rs. {{$service->service_charge}}</h3>
-    <a href="" class="btn btn-common float-right">Request Service</a>
+    <a href="{{ url('customer/register/service/'.$service->id)}}" class="btn btn-common float-right">Request Service</a>
     </div>
     </div>
     </div>
@@ -107,7 +107,7 @@
         <p class="dsc">{{$service->description}}</p>
         <div class="listing-bottom">
         <h3 class="price float-left">Rs. {{$service->service_charge}}</h3>
-        <a href="" class="btn btn-common float-right">Request Service</a>
+        <a href="{{ url('customer/register/service/'.$service->id)}}" class="btn btn-common float-right">Request Service</a>
     </div>
     </div>
     </div>

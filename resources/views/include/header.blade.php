@@ -7,22 +7,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Service On Online Demand</title>
-
-<link rel="stylesheet" type="text/css" href="{{ asset('assets') }}/css/bootstrap.min.css">
-
-<link rel="stylesheet" type="text/css" href="{{ asset('assets') }}/fonts/line-icons.css">
-
-<link rel="stylesheet" type="text/css" href="{{ asset('assets') }}/css/slicknav.css">
-
-<link rel="stylesheet" type="text/css" href="{{ asset('assets') }}/css/color-switcher.css">
-
-<link rel="stylesheet" type="text/css" href="{{ asset('assets') }}/css/animate.css">
-
-<link rel="stylesheet" type="text/css" href="{{ asset('assets') }}/css/owl.carousel.css">
-
-<link rel="stylesheet" type="text/css" href="{{ asset('assets') }}/css/main.css">
-
-<link rel="stylesheet" type="text/css" href="{{ asset('assets') }}/css/responsive.css">
+@include('include.css')
 </head>
 <body>
 
@@ -93,6 +78,12 @@ Home
     </a>
     </li>
 </li>
+{{-- <li class="nav-item {{ 'services' == request()->path() ? 'active' :'' }}">
+    <a class="nav-link" href="{{ url('/services')}}">
+    Service Providers
+    </a>
+    </li>
+</li> --}}
 
 <li class="nav-item {{ 'about' == request()->path() ? 'active' :'' }}">
     <a class="nav-link" href="{{ url('/about')}}">
@@ -103,7 +94,7 @@ Home
 
 <li class="nav-item {{ 'testimonial' == request()->path() ? 'active' :'' }}">
     <a class="nav-link" href="{{ url('/testimonial')}}">
-    Testimonial
+    Testimonials
     </a>
     </li>
 </li>
@@ -114,10 +105,7 @@ Contact
 </a>
 </li>
 </ul>
-<div class="post-btn">
-<a class="btn btn-common" href="post-ads.html"><i class="lni-users"></i> Service Provider</a>
-</div>
-</div>
+
 </div>
 
 <ul class="mobile-menu">
@@ -137,12 +125,19 @@ Services
 
 </li>
 
+{{-- <li>
+    <a href="#">
+    Service Providers
+    </a>
+
+    </li> --}}
+
 <li>
 <a href="#">About Us</a>
 
 </li>
 <li>
-    <a href="#">Testimonial</a>
+    <a href="#">Testimonials</a>
 
     </li>
 

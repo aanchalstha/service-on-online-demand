@@ -48,8 +48,8 @@ Route::group(['prefix' => 'admin','middleware' => ['auth', 'admin']], function()
     //product sub category
     Route::resource('service/subcat', 'SubCategoryController');
     Route::get('service/subcat', 'SubCategoryController@index')->name('subcategories');
-    Route::get('service-subcat', 'SubCategoryController@create')->name('subcateggory.create');
-    Route::post('service-subcat/delete/{id}', 'SubCategoryController@destroy');
+    Route::get('service-subcat', 'SubCategoryController@create')->name('subcategory.create');
+    Route::any('service-subcat/delete/{id}', 'SubCategoryController@destroy')->name('subcategory.delete');
 
     //show subcategories of category
     Route::get('category-subcat-details/{id}','SubCategoryController@showCatSubcat')->name('view.subcat');
@@ -78,11 +78,29 @@ Route::group(['prefix' => 'admin','middleware' => ['auth', 'admin']], function()
     Route::post('update/testimonial/{id}', 'TestimonialController@update')->name('update.testimonial');
     Route::post('delete/testimonial/{id}', 'TestimonialController@destroy')->name('delete.testimonial');
 
-    //routes for admin settings
+    Route::get('edit/service/requests/{id}','HomeController@editServiceRequest')->name('edit.service-requests');
+    Route::any('update/service/requests/{id}','HomeController@updateServiceRequest')->name('update.service-requests');
+    Route::post('delete/service/requests/{id}', 'HomeController@destroy')->name('servicerequests.delete');
     Route::get('settings','AdminController@viewSettings');
 });
 Route::group(['prefix' => 'customer','middleware' => 'auth'], function() {
-    Route::get('/','CustomerController@index');
+    Route::get('/','CustomerController@index')->name('customer.index');
+    Route::get('register/service/{sid}', 'CustomerController@registerService');
+    Route::get('view/service/requests/{id}', 'CustomerController@viewServiceRequests');
+    Route::get('view/completed/services', 'CustomerController@viewCompletedServices');
+    Route::post('register/service','CustomerController@finalServiceRegister');
+    Route::get('settings','CustomerController@viewSettings');
+    Route::get('change_password', 'ChangeCustomerPasswordController@showChangePasswordForm')->name('customer.change_password');
+    Route::patch('change_password', 'ChangeCustomerPasswordController@changePassword')->name('customer.change_password');
+
+    Route::get('reviews', 'TestimonialController@index')->name('view.testimonial');
+    Route::get('add/review', 'TestimonialController@create')->name('add.testimonial');
+    Route::post('store/review', 'TestimonialController@store')->name('store.testimonial');
+    Route::get('edit/review/{id}', 'TestimonialController@edit')->name('edit.testimonial');
+    Route::post('update/review/{id}', 'TestimonialController@update')->name('update.testimonial');
+    Route::post('delete/review/{id}', 'TestimonialController@destroy')->name('delete.testimonial');
 });
 
 
+Route::get('change_password', 'Auth\ChangePasswordController@showChangePasswordForm')->name('auth.change_password');
+Route::patch('change_password', 'Auth\ChangePasswordController@changePassword')->name('auth.change_password');

@@ -14,9 +14,8 @@ Product Index
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <h3>Categories Listing</h3>
-                        <a href="{{url('/product-categories')}}" class="btn btn-primary ">Add New Category</a>&nbsp;&nbsp;&nbsp;
-                        <a href="{{url('/product-categories')}}" class="btn btn-primary ">Add Sub Category</a>
+                    <h3>Sub Categories Listing</h3>
+                        <a href="{{url('/admin/service-subcat')}}" class="btn btn-primary ">Add Sub Category</a>
 
                 </div>
 
@@ -29,28 +28,34 @@ Product Index
                         <table class="table table-hover table-bordered">
                             <thead>
                                 <th>Id</th>
-                                <th>Name</th>
-                                <th>Status</th>
-                                <th>Created By</th>
+                                <th>Sub Category Name</th>
+                                <th>Category Name</th>
 
                                 <th>Action</th>
 
                             </thead>
-                            @foreach($category as $cat)
+                            @php $counter = 1; @endphp
+                            @foreach($subcat as $cat)
 
                             <tbody>
 
-                                     <td> {{ $cat->id}}</td>
-                                    <td> {{ $cat->name}}</td>
-                                    @if ($cat->status==1)<td style="color:green;"> Active </td>
-                                    @else<td style="color:red;"> Not Active</td>
-                                    @endif
-                                    <td>{{ $cat->created_by}}</td>
+                                     <td> {{ $counter }}</td>
+                                    <td> {{ $cat->subcat_name}}</td>
+                                    <td> {{ $cat->category_name}}</td>
+
+
                                     <td>
-                                   <center> <a href="{{url('product-categories/delete/'.$cat->id)}}"><i class="fa fa-trash" aria-hidden="true"></i></center>
+                                        <form method="POST" action="{{route('subcategory.delete', $cat->subcat_id)}}">
+                                            @csrf
+                                            <input name="_method" type="hidden" value="POST">
+                                            <button type="submit" class="btn btn-sm btn-danger btn-flat show_confirm" data-toggle="tooltip" title='Delete'> <i class="fa fa-trash"> </i></button>
+                                        </form>
+
+
                                     </a>
                                     </td>
                             </tbody>
+                            @php $counter++; @endphp
                             @endforeach
 
 
@@ -67,7 +72,13 @@ Product Index
 </div>
 
 @endsection
-
 @section('scripts')
+<script>
+     $('.show_confirm').click(function(e) {
+        if(!confirm('Are you sure you want to delete this Sub Category?')) {
+            e.preventDefault();
+        }
+    });
 
+</script>
 @endsection
