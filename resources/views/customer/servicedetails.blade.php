@@ -97,10 +97,12 @@ SR Details Section
                                        Status
                                     </td>
                                     <td>
-                                        @if($data->is_completed == 1)
+                                        @if($data->isCompleted == 1)
                                         <span style="color:green;">Completed</span>
-                                        @elseif(($data->is_completed !== 1) && (is_null($data->service_provider_id)))
+                                        @elseif(($data->isCompleted !== 1) && (is_null($data->service_provider_id)))
                                         <span style="color:green;">In Queue</span>
+                                        @elseif(($data->isCompleted !== 1) && (!is_null($data->service_provider_id)))
+                                        <span style="color:green;">Assigned</span>
                                         @else
                                         <span style="color:red;">Cancelled</span>
                                         @endif

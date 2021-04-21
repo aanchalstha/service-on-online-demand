@@ -82,10 +82,10 @@ class TestimonialController extends Controller
         $status = DB::table('testimonials')->insert($testimonial_data_to_store);
 
         if($status){
-            return redirect()->route('view.testimonial')->with(['message'=> 'Testimonial Successfully Added!!']);
+            return redirect()->route('view.testimonial')->with(['message'=> 'Feedback/Review Successfully Added!!']);
         }
         else{
-            return redirect()->route('view.testimonial')->with(['error'=> 'Error While Adding Testimonial!!']);
+            return redirect()->route('view.testimonial')->with(['error'=> 'Error While Adding Feedback/Review!!']);
         }
 
     }
@@ -164,10 +164,10 @@ class TestimonialController extends Controller
         $status = Testimonials::where('id',$id)->update($testimonial_data_to_update);
 
         if($status){
-            return redirect()->route('view.testimonial')->with(['message'=> 'Testimonial Successfully Updated!!']);
+            return redirect()->route('view.testimonial')->with(['message'=> 'Feedback/Review Successfully Updated!!']);
         }
         else{
-            return redirect()->route('view.testimonial')->with(['error'=> 'Error While Updating Testimonial!!']);
+            return redirect()->route('view.testimonial')->with(['error'=> 'Error While Updating Feedback/Review!!']);
         }
 
     }
@@ -187,6 +187,6 @@ class TestimonialController extends Controller
         }
         // dd($product);
         $testimonial->delete();
-        return redirect()->back()->with(['error'=> 'Testimonial Successfully Deleted!!']);
+        return redirect()->back()->with(['error'=> 'Feedback/Review Successfully Deleted!!']);
     }
 }

@@ -34,6 +34,7 @@ Category Index
                     <br>
                     <div class="card-body">
 
+                        <div class="table-responsive">
                         <table id="categories-table" class="table table-striped table-bordered">
                             <thead>
                                 <tr style="font-size: 16px;font-weight:bold; width: 500%;">
@@ -44,9 +45,9 @@ Category Index
                                         Name
                                     </td>
                                     <td>
-                                        Image
+                                       Display Image
                                     </td>
-                                    <td>
+                                    <td >
                                         Description
                                     </td>
                                     <td>
@@ -72,7 +73,7 @@ Category Index
                                 <td>
                                     <img src="{{asset('uploads/testimonials/'.$testimonial->image )}}" style="width: 100px;height:100px;" />
                                 </td>
-                                <td>
+                                <td style="width:20rem;">
                                     {{$testimonial->text }}
                                 </td>
 
@@ -101,7 +102,7 @@ Category Index
                             @endforeach
                         </table>
 
-
+                    </div>
 
                     </div>
             </div>

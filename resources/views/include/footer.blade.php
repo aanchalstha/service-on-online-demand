@@ -19,16 +19,16 @@
     </div>
     <div class="col-lg-4 col-md-4 col-xs-6 col-mb-12">
     <div class="widget">
-    <h3 class="block-title">Quick Link</h3>
+    <h3 class="block-title">Quick Links</h3>
     <ul class="menu">
-    <li><a href="#">- About Us</a></li>
-    <li><a href="#">- Services</a></li>
-    <li><a href="#">- FAQ's</a></li>
-    <li><a href="#">- Service Categories</a></li>
-    <li><a href="#">- Login</a></li>
-    <li><a href="#">- Register</a></li>
-    <li><a href="#">- Contact</a></li>
-    <li><a href="#">- Testimonials</a></li>
+    <li><a href="{{ url('/about')}}">- About Us</a></li>
+    <li><a href="{{ url('/services')}}">- Services</a></li>
+    <li><a href="{{ url('/service-providers')}}">- Service Providers</a></li>
+    <li><a href="{{ url('/services')}}">- Service Categories</a></li>
+    <li><a href="{{ url('/login')}}">- Login</a></li>
+    <li><a href="{{ url('/register')}}">- Register</a></li>
+    <li><a href="{{ url('/')}}">- Contact</a></li>
+    <li><a href="{{ url('/testimonial')}}">- Reviews and Feedbacks</a></li>
     </ul>
     </div>
     </div>

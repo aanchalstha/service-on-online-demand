@@ -31,10 +31,13 @@ Service Provider Index
 
 
                     </div>
-                    <br>
-                    <div class="card-body">
 
-                        <table id="categories-table" class="table table-striped table-bordered">
+                    <div class="card-body">
+                        <span style="color:grey;font-weight:bold;"> Sort by Joined Date:
+                            <a href="{{ url('admin/service-provider/sort/ascending') }}" style="color:grey;font-weight:bold;text-decoration: none;"> <i class="fa fa-arrow-up" aria-hidden="true"></i>  Ascending</a>&nbsp;
+                            <a href="{{ url('admin/service-provider/sort/descending') }}" style="color:grey;font-weight:bold;text-decoration; text-decoration: none;"><i class="fa fa-arrow-down" aria-hidden="true"></i> Descending</a></span>
+
+                            <table id="categories-table" class="table table-striped table-bordered">
                             <thead>
                                 <tr style="font-size: 16px;font-weight:bold; width: 500%;">
                                     <td >
@@ -51,6 +54,9 @@ Service Provider Index
                                     </td>
                                     <td>
                                         Description
+                                    </td>
+                                    <td>
+                                       Created at
                                     </td>
                                     <td>
                                         Status
@@ -78,10 +84,12 @@ Service Provider Index
                                 <td>
                                     <img src="{{asset('uploads/serviceproviders/'.$data->image )}}" style="width: 100px;height:100px;" />
                                 </td>
-                                <td>
+                                <td style="width:15rem;">
                                     {{$data->description }}
                                 </td>
-
+                                <td>
+                                   <span class="badge badge-primary"> {{$data->created_at }}</span>
+                                </td>
                                 <td>
                                     @if ($data->status==1)
                                         <span style="color:green;">Active</span>

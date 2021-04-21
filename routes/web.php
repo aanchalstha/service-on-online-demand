@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UsersController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,6 +20,10 @@ Route::get('category/services/{id}','FrontController@catServices');
 Route::get('/about','FrontController@about');
 Route::get('/testimonial','FrontController@testimonial');
 Route::get('/contact','FrontController@contact');
+Route::get('/service-providers','FrontController@serviceProviders');
+Route::get('/service-providers/fav/{id}','FrontController@favServiceProvider');
+Route::get('categories/sort/ascending','FrontController@sortCatAscending')->name('category.ascending');
+Route::get('categories/sort/descending','FrontController@sortCatDescending')->name('category.ascending');
 
 Auth::routes(['verify' => true]);
 
@@ -44,16 +49,6 @@ Route::group(['prefix' => 'admin','middleware' => ['auth', 'admin']], function()
     Route::post('service-categories/delete/{id}', 'CategoryController@destroy')->name('delete.category');
     Route::get('service', 'CategoryController@getData')->name('productCategories');
 
-
-    //product sub category
-    Route::resource('service/subcat', 'SubCategoryController');
-    Route::get('service/subcat', 'SubCategoryController@index')->name('subcategories');
-    Route::get('service-subcat', 'SubCategoryController@create')->name('subcategory.create');
-    Route::any('service-subcat/delete/{id}', 'SubCategoryController@destroy')->name('subcategory.delete');
-
-    //show subcategories of category
-    Route::get('category-subcat-details/{id}','SubCategoryController@showCatSubcat')->name('view.subcat');
-
     //admin CRUD of Services
     Route::post('delete/service/{id}', 'ServicesController@destroy')->name('delete.service');
     Route::any('add/service', 'ServicesController@create');
@@ -69,6 +64,8 @@ Route::group(['prefix' => 'admin','middleware' => ['auth', 'admin']], function()
     Route::any('update/service-provider/{id}', 'ServiceProviderController@update');
     Route::any('add-service-provider', 'ServiceProviderController@store');
     Route::get('service-provider', 'ServiceProviderController@index')->name('service-provider.index');
+    Route::get('service-provider/sort/ascending','ServiceProviderController@sortAscending')->name('serviceprovider.ascending');
+    Route::get('service-provider/sort/descending','ServiceProviderController@sortDescending')->name('serviceprovider.ascending');
 
     //routes for Testimonials
     Route::get('testimonials', 'TestimonialController@index')->name('view.testimonial');
@@ -78,9 +75,20 @@ Route::group(['prefix' => 'admin','middleware' => ['auth', 'admin']], function()
     Route::post('update/testimonial/{id}', 'TestimonialController@update')->name('update.testimonial');
     Route::post('delete/testimonial/{id}', 'TestimonialController@destroy')->name('delete.testimonial');
 
+    Route::get('users',[UsersController::class,'index'])->name('users.index');
+    Route::get('users/view/{id}',[UsersController::class,'show'])->name('users.view');
+    Route::get('users-data',[UsersController::class,'getData'])->name('users.getData');
+    Route::get('users/add',[UsersController::class,'create'])->name('users.create');
+    Route::post('users/add/data',[UsersController::class,'store'])->name('users.store');
+    Route::get('users/edit/{id}',[UsersController::class,'edit'])->name('users.edit');
+    Route::post('users/update/{id}',[UsersController::class,'update'])->name('users.update');
+    Route::post('users/delete/{id}',[UsersController::class,'destroy'])->name('users.delete');
+
+    //Admin Routes for Service Requests
     Route::get('edit/service/requests/{id}','HomeController@editServiceRequest')->name('edit.service-requests');
     Route::any('update/service/requests/{id}','HomeController@updateServiceRequest')->name('update.service-requests');
     Route::post('delete/service/requests/{id}', 'HomeController@destroy')->name('servicerequests.delete');
+
     Route::get('settings','AdminController@viewSettings');
 });
 Route::group(['prefix' => 'customer','middleware' => 'auth'], function() {

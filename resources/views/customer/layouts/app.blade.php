@@ -76,14 +76,14 @@
               </li>
 
 
-
+{{--
               <li class="{{ 'customer/user-profile'== request()->path() ? 'active' :'' }}">
               <a href="{{url('/customer/')}}">
-                <i class="fa fa-user" aria-hidden="true"></i>
+                <i class="fa fa-credit-card" aria-hidden="true"></i>
 
-                  <p>Profile</p>
+                  <p>Payment</p>
                 </a>
-              </li>
+              </li> --}}
               <li class="{{ 'customer/settings'== request()->path() ? 'active' :'' }}">
                 <a href="{{ url('customer/settings')}}">
                       <i class="fa fa-cogs" aria-hidden="true"></i>

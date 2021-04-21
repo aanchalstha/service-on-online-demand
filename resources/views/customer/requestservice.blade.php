@@ -43,7 +43,7 @@
 </div>
 <div class="form-group mb-3">
     <label class="control-label">Service Duration</label>
-    <input class="form-control input-md" readonly value="{{$service->service_time}} Day(s)" type="text">
+    <input class="form-control input-md" readonly value="{{$service->service_time}} Hour(s)" type="text">
 
     </div>
 <div class="form-group md-3">

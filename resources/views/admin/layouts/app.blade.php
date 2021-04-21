@@ -54,28 +54,23 @@
 
             <!-- Nav Item - Pages Collapse Menu -->
 
-            <li class="nav-item {{ 'admin/service'== request()->path() ? 'active' :'' }}">
+            <li class="nav-item {{ 'admin/service'== request()->path() ? 'active' :'' }}  {{ 'admin/add/service'== request()->path() ? 'active' :'' }}">
                 <a class="nav-link" href="{{ url('admin/service') }}">
                     <i class="fa fa-folder-open" aria-hidden="true"></i>
                     <span>Services Entry </span></a>
             </li>
 
 
-            <li class="nav-item {{ 'admin/service-provider'== request()->path() ? 'active' :'' }}">
+            <li class="nav-item {{ 'admin/service-provider'== request()->path() ? 'active' :'' }} {{ 'admin/add/service-provider'== request()->path() ? 'active' :'' }}">
                 <a class="nav-link" href="{{ url('admin/service-provider') }}">
                     <i class="fa fa-street-view" aria-hidden="true"></i>
                     <span> Service Providers </span></a>
             </li>
 
-            <li class="nav-item {{ 'admin/service/categories'== request()->path() ? 'active' :'' }}">
+            <li class="nav-item {{ 'admin/service/categories'== request()->path() ? 'active' :'' }}{{ 'admin/service-categories'== request()->path() ? 'active' :'' }}">
                 <a class="nav-link" href="{{ url('admin/service/categories')}}">
                     <i class="fas fa-fw fa-th-list"></i>
                     <span>Service Categories </span></a>
-            </li>
-            <li class="nav-item {{ 'admin/service/subcat'== request()->path() ? 'active' :'' }}">
-                <a class="nav-link" href="{{ url('admin/service/subcat')}}">
-                    <i class="fas fa-fw fa-list-alt"></i>
-                    <span>Sub-Categories </span></a>
             </li>
 
             <!-- Divider -->
@@ -87,7 +82,7 @@
             </div>
             <!-- Nav Item - Charts -->
 
-            <li class="nav-item {{ 'admin/banner'== request()->path() ? 'active' :'' }}">
+            <li class="nav-item {{ 'admin/banner'== request()->path() ? 'active' :'' }}{{ 'admin/add-banner-image'== request()->path() ? 'active' :'' }}">
                 <a class="nav-link" href="{{ url('admin/banner')}}">
                     <i class="fas fa-fw fa-chart-area"></i>
                     <span>Banner Images</span></a>
@@ -105,12 +100,17 @@
                 Account Settings
              </div>
 
-
-            <li class="nav-item {{ 'admin/settings'== request()->path() ? 'active' :'' }}">
+             <li class="nav-item {{ 'admin/users'== request()->path() ? 'active' :'' }} {{ 'change_password'== request()->path() ? 'active' :'' }}">
+                <a class="nav-link" href="{{ url('admin/users')}}">
+                    <i class="fa fa-cogs" aria-hidden="true"></i>
+                    <span>User Management</span></a>
+            </li>
+            <li class="nav-item {{ 'admin/settings'== request()->path() ? 'active' :'' }} {{ 'change_password'== request()->path() ? 'active' :'' }}">
                 <a class="nav-link" href="{{ url('admin/settings')}}">
                     <i class="fa fa-cogs" aria-hidden="true"></i>
                     <span>Settings</span></a>
             </li>
+
 
 
 
@@ -143,18 +143,7 @@
                     </button>
 
                     <!-- Topbar Search -->
-                    <form
-                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                        <div class="input-group">
-                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
-                                aria-label="Search" aria-describedby="basic-addon2">
-                            <div class="input-group-append">
-                                <button class="btn btn-primary" type="button">
-                                    <i class="fas fa-search fa-sm"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </form>
+
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
@@ -168,18 +157,7 @@
                             <!-- Dropdown - Messages -->
                             <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
                                 aria-labelledby="searchDropdown">
-                                <form class="form-inline mr-auto w-100 navbar-search">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control bg-light border-0 small"
-                                            placeholder="Search for..." aria-label="Search"
-                                            aria-describedby="basic-addon2">
-                                        <div class="input-group-append">
-                                            <button class="btn btn-primary" type="button">
-                                                <i class="fas fa-search fa-sm"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </form>
+
                             </div>
                         </li>
 

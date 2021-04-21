@@ -8,6 +8,9 @@ use App\Category;
 use App\Testimonials;
 use App\Services;
 use DB;
+use App\ServiceProviders;
+use App\ServiceRequests;
+
 class FrontController extends Controller
 {
     /**
@@ -29,12 +32,41 @@ class FrontController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function sortCatAscending()
+    {
+        $services = DB::table('services as s')
+                        ->select('s.*','c.name as category')
+                        ->join('service_categories as c','s.category_id','=','c.id')
+                        ->where('s.status', 1)->get();
+        $category = Category::orderBy('name', 'ASC')->get();
+
+        return view('home.services',['services'=> $services, 'categories' =>$category]);
+    }
+
+    public function sortCatDescending()
+    {
+        $services = DB::table('services as s')
+                        ->select('s.*','c.name as category')
+                        ->join('service_categories as c','s.category_id','=','c.id')
+                        ->where('s.status', 1)->get();
+        $category = Category::orderBy('name', 'DESC')->get();
+
+        return view('home.services',['services'=> $services, 'categories' =>$category]);
+    }
+
     public function services()
     {
-        $services = Services::where('status', 1)->get();
+        $services = DB::table('services as s')
+                        ->select('s.*','c.name as category')
+                        ->join('service_categories as c','s.category_id','=','c.id')
+                        ->where('s.status', 1)->get();
         $category = Category::all();
 
         return view('home.services',['services'=> $services, 'categories' =>$category]);
+    }
+
+    public function admin(){
+        return view('home.register');
     }
 
     public function about(){
@@ -43,12 +75,36 @@ class FrontController extends Controller
     }
 
     public function testimonial(){
-        $testimonial = Testimonials::where('status', '1')->get();
+        $testimonial = DB::table('testimonials as t')
+                            ->select('t.*','sr.service_id','s.name as service_name')
+                            ->join('service_requests as sr','sr.id','=','t.service_request_id')
+                            ->join('services as s','s.id','=','sr.service_id')
+                            ->get();
         return view('home.testimonial',['testimonials' => $testimonial]);
     }
     public function contact(){
 
         return view('home.contact');
+    }
+
+    public function serviceProviders(){
+        $providers = DB::table('service_providers as sp')
+                        ->select('sp.*','c.name as category')
+                        ->join('service_categories as c','c.id','=','sp.category_id')
+                        ->where('sp.status',1)->get();
+        $max_service_count = ServiceProviders::max('service_count');
+
+        return view('home.serviceprovider',['providers'=> $providers,'max_service_count'=>$max_service_count]);
+    }
+
+    public function favServiceProvider($id){
+        $data = ServiceProviders::find($id);
+        $services = DB::table('service_requests as sr')
+                        ->select('sr.id','s.*')
+                        ->join('services as s','s.id','=','sr.service_id')
+                        ->where('sr.service_provider_id',$id)->get();
+
+        return view('home.favserviceprovider',['data' => $data,'services'=>$services]);
     }
 
     public function catServices($id){

@@ -28,7 +28,6 @@ Category Index
                     @endif
 
                             <a href="{{url('/admin/service-categories')}}" class="btn btn-primary ">Add Category</a>&nbsp;&nbsp;&nbsp;
-                            <a href="{{url('/admin/service-subcat')}}" class="btn btn-primary ">Add Sub Category</a>
 
                     </div>
                     <br>

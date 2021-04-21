@@ -39,7 +39,7 @@ Add Review
 
                         <div class="form-group">
                         <label for="name" required>Please Enter Your Full Name: <span style="color:red;font-size:15px;">&nbsp;*</span></label><br>
-                        <input type="text" name="name" class="form-control" ><br>
+                        <input type="text" name="name" class="form-control" value="{{Auth::user()->name}}" ><br>
 
                             <label for="position" required>Enter your Designation: <span style="color:red;font-size:15px;">&nbsp;*</span></label><br>
                             <input type="text" name="position" class="form-control" ><br>
@@ -60,7 +60,7 @@ Add Review
                             </div>
 
                         <div >
-                            <label for="Select Image">Select Display Image: <span style="color:red;font-size:15px;">&nbsp;*</span></label><br>
+                            <label for="Select Image">Select Your Display Image: <span style="color:red;font-size:15px;">&nbsp;*</span></label><br>
 
                             <input type='file' onchange="readURL(this);" name="image"  />
                             <br><br>

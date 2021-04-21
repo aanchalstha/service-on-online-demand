@@ -64,7 +64,7 @@ Edit Review
                             </div>
 
                         <div >
-                            <label for="Select Image">Select Display Image: <span style="color:red;font-size:15px;">&nbsp;*</span></label><br>
+                            <label for="Select Image">Select Your Display Image: <span style="color:red;font-size:15px;">&nbsp;*</span></label><br>
 
                             <input  type='file' onchange="readURL(this);" name="image"  />
                             <br><br>

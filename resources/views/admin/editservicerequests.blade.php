@@ -59,7 +59,7 @@ SR Details Section
                                         Service Duration
                                     </td>
                                     <td>
-                                      {{$data->duration}} Day(s)
+                                      {{$data->duration}} Hour(s)
                                     </td>
                                 </tr>
                                 <tr>
@@ -86,12 +86,13 @@ SR Details Section
                                     <td>
                                         @if ($data->service_provider_id)
                                         <select class="form-control" name="provider_id" id="exampleFormControlSelect1"  autocomplete="off">
-                                            <option  disabled selected> Select Service Category</option>
                                             @foreach($serviceproviders as $provider)
                                                 @if($data->service_provider_id == $provider->id)
                                                 <option value="{{$provider->id}}" selected>{{$provider->name}}</option>
                                                 @else
-                                                <option value="{{$provider->id}}">{{$provider->name}}</option>
+                                                    @if($provider->available == 1)
+                                                    <option value="{{$provider->id}}">{{$provider->name}}</option>
+                                                    @endif
                                                 @endif
                                             @endforeach
                                         </select>
@@ -99,7 +100,9 @@ SR Details Section
                                         <select class="form-control" name="service_provider_id" id="exampleFormControlSelect1"  autocomplete="off">
                                             <option  disabled selected> Select Service Provider</option>
                                             @foreach($serviceproviders as $provider)
+                                            @if($provider->available == 1)
                                             <option value="{{$provider->id}}">{{$provider->name}}</option>
+                                            @endif
                                              @endforeach
                                         </select>
                                         @endif

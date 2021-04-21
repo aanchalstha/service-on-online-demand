@@ -78,32 +78,27 @@ Home
     </a>
     </li>
 </li>
-{{-- <li class="nav-item {{ 'services' == request()->path() ? 'active' :'' }}">
-    <a class="nav-link" href="{{ url('/services')}}">
+<li class="nav-item {{ 'service-providers' == request()->path() ? 'active' :'' }}">
+    <a class="nav-link" href="{{ url('/service-providers')}}">
     Service Providers
     </a>
     </li>
-</li> --}}
-
-<li class="nav-item {{ 'about' == request()->path() ? 'active' :'' }}">
-    <a class="nav-link" href="{{ url('/about')}}">
-    About
-    </a>
-    </li>
 </li>
+
 
 <li class="nav-item {{ 'testimonial' == request()->path() ? 'active' :'' }}">
     <a class="nav-link" href="{{ url('/testimonial')}}">
-    Testimonials
+    Reviews and Feedbacks
+    </a>
+    </li>
+</li>
+<li class="nav-item {{ 'about' == request()->path() ? 'active' :'' }}">
+    <a class="nav-link" href="{{ url('/about')}}">
+    About Us
     </a>
     </li>
 </li>
 
-<li class="nav-item {{ 'contact' == request()->path() ? 'active' :'' }}">
-<a class="nav-link" href="{{ url('/contact')}}">
-Contact
-</a>
-</li>
 </ul>
 
 </div>
@@ -141,9 +136,6 @@ Services
 
     </li>
 
-<li>
-<a href="contact.html">Contact </a>
-</li>
 </ul>
 
 </nav>

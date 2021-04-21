@@ -51,7 +51,7 @@ Add Service
 
                         <div class="form-row">
 
-                            <div class="form-group col-md-6">
+                            <div class="form-group col-md-12">
                                 <label for="Category Select">Service Category Select<span style="color:red;font-size:15px;">&nbsp;*</span></label>
                                 <select class="form-control" name="category_id" id="exampleFormControlSelect1"  autocomplete="off">
                                     <option  disabled selected> Select Service Category</option>
@@ -60,15 +60,7 @@ Add Service
                                 @endforeach
                                 </select>
                             </div>
-                            <div class="form-group col-md-6">
-                                <label for="Category Select">Service Sub Category Select</label>
-                                <select class="form-control" name="subcategory_id" id="exampleFormControlSelect1">
-                                    <option  disabled selected> Select Service Sub Category</option>
-                                    @foreach($subcat as $catData)
-                                         <option value="{{$catData->id}}">{{$catData->name}}</option>
-                                    @endforeach
-                                </select>
-                              </div>
+
                           </div>
 
 
@@ -90,8 +82,8 @@ Add Service
                             <input type="number" step="any" name="service_fee" class="form-control" placeholder="e.g. 2500" ><br>
                         </div>
                         <div class="form-group">
-                            <label for="title">Service Time Period(In Days) </label><br>
-                            <input type="number" step="any" name="service_time" class="form-control" placeholder="e.g. 2  for 2 Days" ><br>
+                            <label for="title">Service Time Period(In Hours) </label><br>
+                            <input type="number" step="any" name="service_time" class="form-control" placeholder="e.g. 2  for 2 Hours" ><br>
                         </div>
 
                         <div class="form-group">

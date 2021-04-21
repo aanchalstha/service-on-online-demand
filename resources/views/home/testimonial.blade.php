@@ -36,6 +36,7 @@
                         <p class="description">{{$testimonial->text}}</p>
                         <div class="info-text">
                             <h2><a href="#">{{$testimonial->name}}</a></h2>
+                            <h4><a href="#">Service Name: {{$testimonial->service_name}}</a></h4>
                             <h4><a href="#">{{$testimonial->position}}</a></h4>
                         </div>
                     </div>
@@ -46,7 +47,7 @@
         </div>
         </div>
         @else
-        There are no testimonials available at the moment. Please check in later.
+        There are no Reviews and Feedbacks available at the moment. Please check in later.
         @endif
     </div>
     </div>

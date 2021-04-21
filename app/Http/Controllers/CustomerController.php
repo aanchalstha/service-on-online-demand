@@ -8,6 +8,7 @@ use DB;
 use Auth;
 use App\Members;
 use App\ServiceRequests;
+use App\ServiceProviders;
 
 class CustomerController extends Controller
 {
@@ -18,11 +19,14 @@ class CustomerController extends Controller
      */
     public function index()
     {
+        $auth_user_id = Auth::user()->id;
+        $member_id = Members::where('user_id', $auth_user_id)->pluck('id')->first();
+
         $services = DB::table('service_requests as sr')
                         ->select('sr.*','s.name as service_name','c.name as category_name')
                         ->join('services as s','s.id','=','sr.service_id')
                         ->join('service_categories as c','c.id','=','s.category_id')
-                        ->get();
+                        ->where('sr.member_id',$member_id)->get();
        return view('customer.index',['services' => $services]);
     }
 
@@ -51,16 +55,29 @@ class CustomerController extends Controller
         $auth_user_id = Auth::user()->id;
         $member_id = Members::where('user_id', $auth_user_id)->pluck('id')->first();
 
+        $category_id = Services::where('id',$request->service_id)->pluck('category_id')->first();
+        $service_provider_id = ServiceProviders::where([['category_id',$category_id],['available',1]])->pluck('id')->first();
+
         $service_requests_data_to_insert = [];
         $service_requests_data_to_insert['service_id'] = $request->service_id;
         $service_requests_data_to_insert['service_location'] = $request->service_location;
         $service_requests_data_to_insert['description'] = $request->service_description;
         $service_requests_data_to_insert['service_date'] = $request->service_date;
+        $service_requests_data_to_insert['service_provider_id'] = $service_provider_id;
         $service_requests_data_to_insert['member_id'] = $member_id;
         $service_requests_data_to_insert['price'] = Services::where('id', $request->service_id)->pluck('service_charge')->first();
 
-        $status = ServiceRequests:: create($service_requests_data_to_insert);
+        if(Auth::user()->usertype == 'admin'){
+            return redirect()->route('home')->with(['error'=> 'Admin Users Cannot Place Order From the system !!']);
+        }
+
+        $status = ServiceRequests::create($service_requests_data_to_insert);
         if($status){
+
+            $provider = ServiceProviders::find($service_provider_id);
+            $provider->available = 0;
+            $provider->update();
+
             return redirect()->route('customer.index')->with(['message'=> 'Service Request Placed Successfully. Please wait for the admin to approve them !!']);
         }
         else{
@@ -85,12 +102,15 @@ class CustomerController extends Controller
 
     public function viewCompletedServices(){
 
+        $auth_user_id = Auth::user()->id;
+        $member_id = Members::where('user_id', $auth_user_id)->pluck('id')->first();
+
         $services = DB::table('service_requests as sr')
                         ->select('sr.*','s.name as service_name','s.service_time as duration','c.name as category_name','p.name as service_provider')
                         ->join('services as s','s.id','=','sr.service_id')
                         ->join('service_categories as c','c.id','=','s.category_id')
                         ->leftJoin('service_providers as p','sr.service_provider_id','=','p.id')
-                        ->where('sr.isCompleted',1)->get();
+                        ->where([['sr.isCompleted',1],['sr.member_id',$member_id]])->get();
        return view('customer.completedservices',['services' => $services]);
     }
     /**

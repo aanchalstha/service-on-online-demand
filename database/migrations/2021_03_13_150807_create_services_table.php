@@ -22,18 +22,6 @@ class CreateServicesTable extends Migration
             $table->integer('status')->default(1);
             $table->timestamps();
         });
-        Schema::create('sub_categories', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('name');
-            $table->boolean('status')->default(1);
-
-            $table->unsignedBigInteger('category_id');
-            $table->foreign('category_id')
-                ->references('id')->on('service_categories')
-                ->onDelete('cascade');
-            $table->timestamps();
-        });
-
         Schema::create('services', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
@@ -45,8 +33,6 @@ class CreateServicesTable extends Migration
             $table->string('service_charge');
             $table->unsignedBigInteger('category_id')->nullable();
             $table->foreign('category_id')->references('id')->on('service_categories')->onDelete('cascade');
-            $table->unsignedBigInteger('sub_category_id')->nullable();
-            $table->foreign('sub_category_id')->references('id')->on('sub_categories')->onDelete('cascade');
             $table->boolean('status')->default(true);
 
             $table->timestamps();
@@ -59,6 +45,8 @@ class CreateServicesTable extends Migration
             $table->unsignedBigInteger('category_id')->nullable();
             $table->foreign('category_id')->references('id')->on('service_categories')->onDelete('cascade');
             $table->string('rate');
+            $table->integer('available')->default(1);
+            $table->bigInteger('service_count')->default(0);
             $table->integer('status')->default(1);
             $table->timestamps();
         });

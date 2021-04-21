@@ -158,6 +158,24 @@ class ServiceProviderController extends Controller
         }
     }
 
+    public function sortAscending(){
+        $serviceproviders = DB::table('service_providers as s')
+        ->select('s.*','c.name as category_name')
+        ->join('service_categories as c','c.id','=','s.category_id')
+        ->orderBy('created_at', 'desc')->get();
+
+        return view('admin.serviceprovider.index',['serviceproviders' => $serviceproviders]);
+    }
+
+    public function sortDescending(){
+        $serviceproviders = DB::table('service_providers as s')
+        ->select('s.*','c.name as category_name')
+        ->join('service_categories as c','c.id','=','s.category_id')
+        ->orderBy('created_at', 'asc')->get();
+
+        return view('admin.serviceprovider.index',['serviceproviders' => $serviceproviders]);
+    }
+
     /**
      * Remove the specified resource from storage.
      *

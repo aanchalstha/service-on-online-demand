@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Services;
 use App\Category;
-use App\Subcategories;
 use Image;
 use File;
 use DB;
@@ -36,9 +35,8 @@ class ServicesController extends Controller
     public function create()
     {
         $category = Category::where('status',1)->get();
-        $subcat = SubCategories::where('status',1)->get();
 
-       return view('admin.service.create',['category' => $category,'subcat' => $subcat]);
+       return view('admin.service.create',['category' => $category]);
     }
 
     /**
@@ -73,7 +71,7 @@ class ServicesController extends Controller
          $service_data_to_insert['image'] = $filename;
          $service_data_to_insert['slug'] = $slug;
          $service_data_to_insert['category_id'] = $request->category_id;
-         $service_data_to_insert['sub_category_id'] = $request->sub_category_id ?? null;
+
          $service_data_to_insert['service_charge'] = $request->service_fee;
          $service_data_to_insert['service_time'] = $request->service_time ?? null;
          $service_data_to_insert['description'] = $request->description;
@@ -117,9 +115,9 @@ class ServicesController extends Controller
     {
         $service = Services::find($id);
         $category = Category::where('status',1)->get();
-        $subcat = SubCategories::where('status',1)->get();
 
-        return view('admin.service.edit',[ 'service' => $service, 'category' => $category,'subcat' => $subcat]);
+
+        return view('admin.service.edit',[ 'service' => $service, 'category' => $category]);
     }
 
     /**
@@ -157,7 +155,6 @@ class ServicesController extends Controller
          $service_data_to_update['name'] = $request->service_name;
          $service_data_to_update['image'] = $filename;
          $service_data_to_update['category_id'] = $request->category_id;
-         $service_data_to_update['sub_category_id'] = $request->sub_category_id ?? null;
          $service_data_to_update['service_charge'] = $request->service_fee;
          $service_data_to_update['service_time'] = $request->service_time ?? null;
          $service_data_to_update['description'] = $request->description;

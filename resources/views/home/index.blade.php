@@ -101,7 +101,7 @@
 <h1 class="section-title">Featured Services</h1>
 <div class="row">
     @foreach($services as $service)
-        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
             <div class="featured-box" style="width:500px;">
                 <figure>
                     <div class="icon">
