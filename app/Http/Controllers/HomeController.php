@@ -60,6 +60,7 @@ class HomeController extends Controller
       $service_provider_data_to_update = [];
       $service_provider_data_to_update['service_provider_id'] = $request->provider_id;
       $service_provider_data_to_update['isCompleted'] = $request->is_completed;
+      $service_provider_data_to_update['has_paid'] = $request->has_paid;
 
       $status = ServiceRequests::where('id',$id)->update($service_provider_data_to_update);
 

@@ -26,6 +26,7 @@ class CreateServiceRequestsTable extends Migration
             $table->foreign('service_provider_id')->references('id')->on('service_providers')->onDelete('cascade');
             $table->text('description');
             $table->boolean('isCompleted')->default(false);
+            $table->boolean('has_paid')->default(false);
             $table->timestamps();
         });
     }

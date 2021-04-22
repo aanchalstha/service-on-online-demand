@@ -116,6 +116,34 @@ SR Details Section
                                         {{$data->description}}
                                     </td>
                                 </tr>
+
+                                <tr>
+                                    <td>
+                                        Service Request Date/Time
+                                    </td>
+                                    <td>
+                                        {{$data->created_at}}
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                       Payment Status
+                                    </td>
+                                    <td>
+                                        <select class="form-control" name="has_paid" id="exampleFormControlSelect1"  autocomplete="off">
+                                            <option  disabled selected> Select Service Payment Status</option>
+                                           @if(($data->has_paid) == TRUE){
+                                            <option value="0">Not Paid</option>
+                                            <option value="1" selected>Paid</option>
+                                           }
+                                           @else
+                                            <option value="0" selected>Not Paid</option>
+                                            <option value="1">Paid</option>
+                                            @endif
+                                        </select>
+                                    </td>
+                                </tr>
                                 <tr>
                                     <td>
                                        Is Service Completed?
@@ -132,15 +160,6 @@ SR Details Section
                                             <option value="1">Completed</option>
                                             @endif
                                         </select>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        Service Request Date/Time
-                                    </td>
-                                    <td>
-                                        {{$data->created_at}}
-
                                     </td>
                                 </tr>
                             </tbody>

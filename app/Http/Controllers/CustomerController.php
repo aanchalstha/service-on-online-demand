@@ -110,9 +110,35 @@ class CustomerController extends Controller
                         ->join('services as s','s.id','=','sr.service_id')
                         ->join('service_categories as c','c.id','=','s.category_id')
                         ->leftJoin('service_providers as p','sr.service_provider_id','=','p.id')
-                        ->where([['sr.isCompleted',1],['sr.member_id',$member_id]])->get();
+                        ->where([['sr.isCompleted',1],['sr.has_paid',1],['sr.member_id',$member_id]])->get();
        return view('customer.completedservices',['services' => $services]);
     }
+
+    public function viewpaidServices(){
+
+        $auth_user_id = Auth::user()->id;
+        $member_id = Members::where('user_id', $auth_user_id)->pluck('id')->first();
+
+        $services = DB::table('service_requests as sr')
+                        ->select('sr.*','s.name as service_name','s.service_time as duration','c.name as category_name','p.name as service_provider')
+                        ->join('services as s','s.id','=','sr.service_id')
+                        ->join('service_categories as c','c.id','=','s.category_id')
+                        ->leftJoin('service_providers as p','sr.service_provider_id','=','p.id')
+                        ->where([['sr.member_id',$member_id]])->get();
+       return view('customer.payment',['services' => $services]);
+    }
+
+    public function payService($id)
+    {
+        $data = DB::table('service_requests as sr')
+                    ->select('sr.*','s.name as service_name','s.service_time as duration','c.name as category_name','p.name as service_provider')
+                    ->join('services as s','s.id','=','sr.service_id')
+                    ->join('service_categories as c','c.id','=','s.category_id')
+                    ->leftJoin('service_providers as p','sr.service_provider_id','=','p.id')
+                    ->where('sr.id',$id)->get()->first();
+        return view('customer.paynow',['data' => $data]);
+    }
+
     /**
      * Store a newly created resource in storage.
      *

@@ -4,7 +4,7 @@
 
 @section('title')
 
-SR Details Section
+Payment Details Section
 
 @endsection
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
@@ -15,7 +15,7 @@ SR Details Section
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title"> Service Request Details for {{$data->service_name}} </h4>
+                    <h4 class="card-title"> Payment Details for {{$data->service_name}} </h4>
                 </div>
                 <div class="card-body">
                     <div class="mb-2">
@@ -48,18 +48,20 @@ SR Details Section
                                 </tr>
                                 <tr>
                                     <td>
-                                        Service Duration
+                                        Service Date and Duration
                                     </td>
                                     <td>
-                                      {{$data->duration}} Day(s)
+                                        {{$data->service_date}},
+                                        {{$data->duration}} Day(s)
+
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        Service Date
+                                       Description
                                     </td>
                                     <td>
-                                        {{$data->service_date}}
+                                        {{$data->description}}
                                     </td>
                                 </tr>
                                 <tr>
@@ -72,63 +74,27 @@ SR Details Section
                                 </tr>
                                 <tr>
                                     <td>
-                                        Service Provider
+                                        Service Cost
                                     </td>
                                     <td>
-                                        @if ($data->service_provider_id)
-                                        {{$data->service_provider}}
-                                        @else
-                                        <span style="color:red"> Not Assigned Yet</span>
-                                        @endif
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                       Description
-                                    </td>
-                                    <td>
-                                        {{$data->description}}
-                                    </td>
-                                </tr>
-
-
-                                <tr>
-                                    <td>
-                                       Status
-                                    </td>
-                                    <td>
-                                        @if($data->isCompleted == 1)
-                                        <span style="color:green;">Completed</span>
-                                        @elseif(($data->isCompleted !== 1) && (is_null($data->service_provider_id)))
-                                        <span style="color:green;">In Queue</span>
-                                        @elseif(($data->isCompleted !== 1) && (!is_null($data->service_provider_id)))
-                                        <span style="color:green;">Assigned</span>
-                                        @else
-                                        <span style="color:red;">Cancelled</span>
-                                        @endif
-                                    </td>
-                                </tr>
-
-
-                                <tr>
-                                    <td>
-                                        Service Request Date/Time
-                                    </td>
-                                    <td>
-                                        {{$data->created_at}}
+                                      {{$data->price}}
 
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        Service Payment Status
+                                        QR Code (Cash On Delivery)
                                     </td>
                                     <td>
-                                       @if($data->has_paid == 1)
-                                        <span style="color:green;">PAID</span>
-                                        @else
-                                        <span style="color:red;">NOT PAID</span>
-                                        @endif
+                                        <img src="{{ asset('assets/img/qrcode.png')}}" alt="" style="height:150px;width:150px;">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                       Instructions
+                                    </td>
+                                    <td style="width:45rem;">
+                                        Please complete the payment and wait for the confirmation by Service Provider or Site Administrator. After the confirmation is done, your service will be set on Completed state.
                                     </td>
                                 </tr>
 

@@ -60,6 +60,14 @@
                 </a>
               </li>
 
+              <li class="{{ 'customer/view/paid/services'== request()->path() ? 'active' :'' }}">
+                <a href="{{url('/customer/view/paid/services')}}">
+                  <i class="fa fa-credit-card" aria-hidden="true"></i>
+
+                    <p>Payment</p>
+                  </a>
+                </li>
+
               <li class="{{ 'customer/view/completed/services'== request()->path() ? 'active' :'' }}">
               <a href="{{ url('/customer/view/completed/services')}}">
                 <i class="fa fa-file-text-o" aria-hidden="true"></i>
@@ -76,14 +84,7 @@
               </li>
 
 
-{{--
-              <li class="{{ 'customer/user-profile'== request()->path() ? 'active' :'' }}">
-              <a href="{{url('/customer/')}}">
-                <i class="fa fa-credit-card" aria-hidden="true"></i>
 
-                  <p>Payment</p>
-                </a>
-              </li> --}}
               <li class="{{ 'customer/settings'== request()->path() ? 'active' :'' }}">
                 <a href="{{ url('customer/settings')}}">
                       <i class="fa fa-cogs" aria-hidden="true"></i>

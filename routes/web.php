@@ -96,6 +96,8 @@ Route::group(['prefix' => 'customer','middleware' => 'auth'], function() {
     Route::get('register/service/{sid}', 'CustomerController@registerService');
     Route::get('view/service/requests/{id}', 'CustomerController@viewServiceRequests');
     Route::get('view/completed/services', 'CustomerController@viewCompletedServices');
+    Route::get('view/paid/services', 'CustomerController@viewPaidServices');
+    Route::get('pay/service/{id}', 'CustomerController@payService');
     Route::post('register/service','CustomerController@finalServiceRegister');
     Route::get('settings','CustomerController@viewSettings');
     Route::get('change_password', 'ChangeCustomerPasswordController@showChangePasswordForm')->name('customer.change_password');

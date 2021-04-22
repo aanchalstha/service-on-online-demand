@@ -40,7 +40,7 @@ Services Listing
                                         Featured Image
                                      </td>
                                     <td>
-                                        Slug
+                                        Description
                                     </td>
                                     <td>
                                         Category
@@ -65,8 +65,8 @@ Services Listing
                                 <td >
                                     <img src="{{asset('uploads/services/'.$service->service_image)}}" height="150">
                                  </td>
-                                <td>
-                                   {{ $service->slug }}
+                                <td style="width:15rem;">
+                                   {{ $service->description }}
                                 </td>
                                 <td>
                                     {{ $service->category_name }}
